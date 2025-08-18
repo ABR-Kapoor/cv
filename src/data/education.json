@@ -1,0 +1,41 @@
+[
+  {
+    "college": "Govt. V.Y.T. Post Graduate Autonomous College (Durg)",
+    "degree": "BCA - Bachelor's degree in Computer Applications",
+    "cgpa": "8.2",
+    "year": "2021-24",
+    "subjects": [
+      "Data Structures",
+      "Database Management Systems",
+      "Operating Systems",
+      "Software Engineering",
+      "Computer Networks",
+      "Python Programming"
+    ],
+    "achievements": [
+      "CGPA: 8.2/10 - Excellent performance",
+      "Rank #1 in BCA final",
+      "Active participation in technical events and debates"
+    ]
+  },
+  {
+    "college": "Bhilai Institute of Technology College (Bhilai)",
+    "degree": "Master’s in Computer Application",
+    "year": "2024-26",
+    "status": "Ongoing",
+    "subjects": [
+      "Advanced Java",
+      "Operating Systems",
+      "Software Engineering",
+      "Computer Networks",
+      "Artificial Intelligence",
+      "Advanced Database Systems"
+    ],
+    "achievements": [
+      "Hosting events as part of Association of MCA",
+      "Executive member, MCA Student Association",
+      "Hackathon Winner (IIT Bhilai, Youth Conclave 2024)",
+      "Honored by Indian National Academy of Engineering (INAE), New Delhi"
+    ]
+  }
+]

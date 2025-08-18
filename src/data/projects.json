@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Hackathon Winner",
+        "location": "IIT Bhilai",
+        "date": "December 2024",
+        "details": "Led the prototype of a gamified mobile app to reduce screen addiction in kids (ages 4\u201312)..."
+    },
+    {
+        "title": "Slobby : Ai Expert System, Business Ecosystem provider",
+        "version": "v1",
+        "date": "April 2025",
+        "details": "Developed a full-stack app that guided 50+ users in converting business ideas into AI-generated task roadmaps..."
+    },
+    {
+        "title": "Anbiden_Now_bot",
+        "platform": "Telegram bot",
+        "date": "June 2025",
+        "details": "Built a Telegram bot using Python, asyncio, and ConversationHandler for secure, real-time anonymous chats..."
+    },
+    {
+        "title": "Photogram",
+        "platform": "Web2 Social media platform",
+        "date": "May 2025",
+        "details": "Built a real-time social media platform using React.js, Firebase, and Material UI for content sharing and discovery..."
+    }
+]

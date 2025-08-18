@@ -40,3 +40,33 @@
 .read-the-docs {
   color: #888;
 }
+
+html, body {
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  background: transparent !important;
+  display: none !important;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(90deg, #06b6d4, #6366f1, #a21caf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glass-morphism utility */
+.glass {
+  background: rgba(30, 41, 59, 0.6); /* dark glass */
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12);
+}

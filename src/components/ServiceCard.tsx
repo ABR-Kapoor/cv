@@ -1,76 +1,96 @@
 import React, { useState } from "react";
 import PayAndFeedback from "./PayAndFeedback";
-import img1 from "../assets/illustrations/GmlaTal2.png";
-import img2 from "../assets/illustrations/college1.png";
+import { ArrowRight, Tag } from "lucide-react"; // Using lucide-react for icons
+import { motion } from "framer-motion";
 
+// The interface is now more flexible with the price type from JSON
 interface ServiceCardProps {
-  title: string;
-  description: string;
-  price: string; // keep string if you want, else number recommended
-  darkMode?: boolean;
+    title: string;
+    description: string;
+    price: string | number; // Handles both string from JSON and number
+    images?: string[];
+    feedbacks?: string[];
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
-  title,
-  description,
-  price,
-  darkMode,
-}) => {
-  const [modalOpen, setModalOpen] = useState(false);
+                                                     title,
+                                                     description,
+                                                     price,
+                                                     images = [],
+                                                     feedbacks = [],
+                                                 }) => {
+    const [modalOpen, setModalOpen] = useState(false);
 
-  // Dummy images and feedbacks - replace or pass as props as needed
-  const images = [img1, img2];
+    // Ensure price is a number for calculations and formatting
+    const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
 
-  const feedbacks = [
-    "Amazing service! Highly recommended.",
-    "Helped me a lot with my career growth.",
-  ];
+    const handleOpenModal = () => setModalOpen(true);
 
-  return (
-    <>
-      <div
-        onClick={() => setModalOpen(true)}
-        className={`p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-2xl transition ${
-          darkMode ? "bg-gray-800" : "bg-white"
-        }`}
-      >
-        <h3
-          className={`text-2xl font-bold mb-2 ${
-            darkMode ? "text-purple-300" : "text-blue-800"
-          }`}
-        >
-          {title}
-        </h3>
-        <p className={`mb-4 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
-          {description}
-        </p>
-        <p
-          className={`font-semibold text-xl ${
-            darkMode ? "text-cyan-400" : "text-blue-600"
-          }`}
-        >
-          ₹{price}
-        </p>
-      </div>
+    // Make the card accessible via keyboard
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleOpenModal();
+        }
+    };
 
-      <PayAndFeedback
-        // isOpen={modalOpen}
-        // onClose={() => setModalOpen(false)}
-        // title={title}
-        // description={description}
-        price={Number(price)}
-        // images={images}
-        // feedbacks={feedbacks}
-      />
-    </>
-  );
+    return (
+        <>
+            <motion.div
+                onClick={handleOpenModal}
+                onKeyDown={handleKeyDown}
+                role="button"
+                tabIndex={0}
+                aria-label={`View details for ${title}`}
+                className="group flex flex-col justify-between h-full p-6 rounded-2xl bg-gray-800/50 border border-gray-700 cursor-pointer transition-all duration-300 ease-in-out hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10"
+                whileHover={{ y: -8, transition: { type: "spring", stiffness: 300 } }}
+            >
+                {/* Main Content */}
+                <div>
+                    {/* Title */}
+                    <h3 className="text-2xl font-bold mb-3 text-cyan-300 group-hover:text-cyan-200 transition-colors">
+                        {title}
+                    </h3>
+
+                    {/* Description - Clamped to 3 lines to keep card heights consistent */}
+                    <p className="mb-6 text-gray-400 line-clamp-3">
+                        {description}
+                    </p>
+                </div>
+
+                {/* Footer section of the card */}
+                <div className="mt-auto">
+                    {/* Price */}
+                    <div className="flex items-center gap-2 mb-4">
+                        <Tag className="w-5 h-5 text-purple-400" />
+                        <p className="font-semibold text-2xl text-purple-300">
+                            ₹{numericPrice.toLocaleString('en-IN')}
+                        </p>
+                    </div>
+
+                    {/* Call to Action */}
+                    <div className="flex items-center text-cyan-400 font-semibold">
+                        <span>View Details</span>
+                        <ArrowRight className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" />
+                    </div>
+                </div>
+            </motion.div>
+            {/* Modal: Pass all service data to PayAndFeedback */}
+            <PayAndFeedback
+                isOpen={modalOpen}
+                setIsOpen={setModalOpen}
+                service={{
+                    title,
+                    description,
+                    price: numericPrice,
+                    images,
+                    feedbacks,
+                    availability: true,
+                    features: []
+                }}
+            />
+        </>
+    );
 };
 
 export default ServiceCard;
-
-// <>
-//   <h3 className={`text-2xl font-bold mb-2 ${darkMode ? "text-purple-300" : "text-blue-800"}`}>{title}</h3>
-//   <p className={`mb-4 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>{description}</p>
-//   <p className={`font-semibold text-xl ${darkMode ? "text-cyan-400" : "text-blue-600"}`}>₹{price}</p>
-
-// </>

@@ -1,0 +1,83 @@
+{
+    "soft_skills": [
+        "Leadership",
+        "Self-Learner",
+        "Good at Negotiations",
+        "Managerial skills",
+        "Great prompt engineer",
+        "Questioning skill",
+        "Observation"
+    ],
+    "languages": [
+        "Java",
+        "Python",
+        "JavaScript",
+        "TypeScript",
+        "SQL (PostgreSQL, MySQL)",
+        "HTML",
+        "CSS"
+    ],
+    "frameworks_libraries": [
+        "React.js",
+        "Next.js",
+        "Node.js",
+        "Express.js",
+        "Spring Boot",
+        "Tailwind CSS",
+        "Scikit-learn",
+        "Pandas",
+        "NumPy",
+        "Matplotlib"
+    ],
+    "cloud_devops": [
+        "AWS (EC2, S3)",
+        "Docker",
+        "Firebase",
+        "Git/GitHub"
+    ],
+    "databases": [
+        "MongoDB",
+        "PostgreSQL",
+        "Firebase Firestore"
+    ],
+    "developer_tools": [
+        "Git",
+        "VS Code",
+        "Visual Studio",
+        "PyCharm",
+        "Net beans",
+        "Neon",
+        "Eclipse",
+        "Cursor",
+        "Clerk",
+        "Telegram Bot-Father",
+        "Google Firebase",
+        "FiGMA",
+        "Government APIs",
+        "ChatGPT",
+        "Gemini pro",
+        "Copilot",
+        "Perplexity",
+        "WhatsApp API",
+        "Payment gateway",
+        "Pinata for Web3 as IPFS"
+    ],
+    "other_tools": [
+        "Jupyter",
+        "VS Code",
+        "Figma",
+        "REST APIs",
+        "Telegram Bot API",
+        "Postman"
+    ],
+    "libraries": [
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "SqlConnection",
+        "NLP",
+        "RAG",
+        "Fine tuning",
+        "Scikit"
+    ]
+}

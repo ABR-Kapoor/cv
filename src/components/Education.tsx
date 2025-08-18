@@ -1,98 +1,161 @@
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import college1 from "../assets/illustrations/college1.png";
-import college2 from "../assets/illustrations/college2.png";
-import { fadeInUp } from "../utils/animations";
+import educationData from "../data/education.json";
+import { FaCalendarAlt, FaStar, FaMedal, FaBookOpen } from "react-icons/fa";
+import college2 from "../assets/illustrations/college1.png";
+import college1 from "../assets/illustrations/college2.png";
 
-const subjects1 = ["DS", "ML", "AI", "Cloud", "DSA"];
-const performance1 = [90, 85, 88, 75, 95];
+const collegeImages: Record<string, string> = {
+  "Govt. V.Y.T. Post Graduate Autonomous College (Durg)": college1,
+  "Bhilai Institute of Technology College (Bhilai)": college2,
+};
 
-const subjects2 = ["Java", "OS", "DBMS", "CN", "Python"];
-const performance2 = [89, 92, 87, 80, 93];
+// const cardBgClass = "bg-gradient-to-r from-gray-900 to-blue-900";
 
-const BarChart = ({
-  subjects,
-  performance,
+const EducationCard = ({
+  edu,
+  imgSrc,
+  flipped,
+  onFlip,
 }: {
-  subjects: string[];
-  performance: number[];
+  edu: any;
+  imgSrc: string;
+  flipped: boolean;
+  onFlip: () => void;
 }) => {
   return (
-    <div className="w-full space-y-4">
-      {subjects.map((subject, index) => (
-        <div key={subject}>
-          <div className="flex justify-between text-sm font-medium text-gray-400">
-            <span>{subject}</span>
-            <span>{performance[index]}%</span>
+    <motion.div
+      className="w-full h-[520px] [perspective:1000px] cursor-pointer"
+      onClick={onFlip}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onFlip();
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      aria-pressed={flipped}
+    >
+      <motion.div
+        className="relative w-full h-full [transform-style:preserve-3d]"
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+      >
+        {/* Front Face */}
+        <div
+          className={`absolute w-full h-full rounded-2xl bg-gradient-to-r from-gray-900 to-blue-900 [backface-visibility:hidden] flex flex-col items-center justify-center gap-4 p-6 text-white`}
+        >
+          <img
+            src={imgSrc}
+            alt={`Logo of ${edu.college}`}
+            className="w-32 h-32 rounded-lg shadow-lg bg-white/10 object-cover"
+            loading="lazy"
+          />
+          <h3 className="text-2xl font-extrabold text-center text-cyan-300 drop-shadow">
+            {edu.degree}
+          </h3>
+          <p className="text-lg text-gray-200 text-center">{edu.college}</p>
+          <div className="flex items-center gap-2 text-md text-gray-300">
+            <FaCalendarAlt className="text-cyan-400" /> {edu.year}
           </div>
-          <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"
-              initial={{ width: 0 }}
-              animate={{ width: `${performance[index]}%` }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-            />
+          {edu.cgpa && (
+            <div className="flex items-center gap-1 text-md text-yellow-300 font-semibold">
+              <FaStar /> GPA: {edu.cgpa}
+            </div>
+          )}
+          {edu.status && (
+            <span className="text-sm text-blue-300 font-medium">
+              {edu.status}
+            </span>
+          )}
+          <span className="text-xs text-gray-400 mt-4 animate-pulse">
+            Click to see more →
+          </span>
+        </div>
+
+        {/* Back Face */}
+        <div
+          className={`absolute w-full h-full rounded-2xl bg-gradient-to-r from-blue-900 to-gray-900 [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col gap-4 p-8`}
+        >
+          <div className="text-white">
+            <h4 className="flex items-center gap-2 font-bold text-cyan-300 mb-2 text-lg">
+              <FaMedal className="text-cyan-400" /> Achievements
+            </h4>
+            <ul className="list-disc list-inside text-md text-gray-200 space-y-2">
+              {edu.achievements.map((ach: string, i: number) => (
+                <li key={i}>{ach}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="text-white">
+            <h4 className="flex items-center gap-2 font-bold text-green-300 mb-2 text-lg">
+              <FaBookOpen className="text-green-400" /> Subjects
+            </h4>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {edu.subjects.map((subj: string, i: number) => (
+                <span
+                  key={i}
+                  className="inline-block px-3 py-1 rounded-full bg-yellow-800 text-sm text-gray-200 hover:bg-cyan-600 transition-colors duration-300"
+                >
+                  {subj}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-      ))}
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
 const Education = () => {
+  const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
+
   return (
-    <section id="education" className="py-20 px-6 text-white">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
-          className="text-left text-4xl md:text-5xl font-extrabold tracking-tight mb-14 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent leading-tight"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          🎓 Education <br />
-          <span className="text-gray-300 text-2xl font-medium">With Tech Edge</span>
-        </motion.h2>
-
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Undergraduate Card */}
+    <section
+      id="education"
+      className="py-24 px-4 bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center"
+    >
+      <div className="text-center mb-16">
+        <h2 className="text-5xl font-extrabold text-cyan-400 drop-shadow-lg tracking-wide">
           <motion.div
-            className="bg-[#0f0f0f] p-6 rounded-2xl shadow-2xl hover:shadow-cyan-500/20 border border-gray-800 transition-shadow"
-            variants={fadeInUp}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
+              className="text-6xl mb-4 cursor-pointer"
+              whileHover={{ scale: 1.2, rotate: [0, -10, 10, -10, 10, 0] }}
           >
-            <div className="flex items-center gap-4 mb-6">
-              <img src={college2} alt="BCA" className="w-16 h-16 rounded-xl" />
-              <div>
-                <h3 className="text-2xl font-semibold text-white">BCA</h3>
-                <p className="text-gray-400 text-sm">
-                  Govt. V.Y.T. P.G. Autonomous College, Durg
-                </p>
-              </div>
-            </div>
-            <BarChart subjects={subjects1} performance={performance1} />
+            🎓
           </motion.div>
+          <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 mb-4">
+            My Academic Journey
+          </h2>
 
-          {/* Postgraduate Card */}
-          <motion.div
-            className="bg-[#0f0f0f] p-6 rounded-2xl shadow-2xl hover:shadow-purple-500/20 border border-gray-800 transition-shadow"
-            variants={fadeInUp}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <img src={college1} alt="MCA" className="w-16 h-16 rounded-xl" />
-              <div>
-                <h3 className="text-2xl font-semibold text-white">MCA</h3>
-                <p className="text-gray-400 text-sm">Current Postgrad Institution</p>
-              </div>
-            </div>
-            <BarChart subjects={subjects2} performance={performance2} />
-          </motion.div>
-        </div>
+        </h2>
+        <p className="text-gray-400 max-w-2xl mx-auto">
+          Here's a look at my educational background, key achievements, and the subjects I've mastered along the way.
+        </p>
       </div>
+      {educationData.length === 0 ? (
+        <div className="text-center text-gray-400 text-lg">
+          No education data available.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full max-w-6xl">
+          {educationData.map((edu: any, idx: number) => {
+            const imgSrc = collegeImages[edu.college] || college1;
+            return (
+              <EducationCard
+                key={idx}
+                edu={edu}
+                imgSrc={imgSrc}
+                flipped={flippedIndex === idx}
+                onFlip={() =>
+                  setFlippedIndex(flippedIndex === idx ? null : idx)
+                }
+              />
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 };

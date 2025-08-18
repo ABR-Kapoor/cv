@@ -1,0 +1,300 @@
+{
+  "personal": {
+    "name": "Radhe",
+    "title": "Future-ready Technocrat",
+    "tagline": "MCA Student • Data Science & AI Enthusiast • Hackathon Winner",
+    "email": "your.email@example.com",
+    "location": "India",
+    "socialLinks": {
+      "github": "https://github.com/yourusername",
+      "linkedin": "https://linkedin.com/in/yourusername",
+      "twitter": "https://twitter.com/yourusername",
+      "instagram": "https://instagram.com/yourusername"
+    },
+    "funFacts": [
+      "Can debug with one eye closed 🧑‍💻",
+      "Professional pizza debugger 🍕",
+      "Turns coffee into code ☕",
+      "Bug whisperer 🐛",
+      "Keyboard ninja ⌨️"
+    ]
+  },
+  "education": {
+    "degrees": [
+      {
+        "title": "Master of Computer Applications (MCA)",
+        "institution": "ABC University",
+        "duration": "2022 - 2024",
+        "location": "City, State",
+        "gpa": "9.2",
+        "achievements": [
+          "Department Rank 1",
+          "Research paper published in IEEE",
+          "Led college tech community"
+        ],
+        "subjects": ["DS", "ML", "AI", "Cloud", "DSA"],
+        "performance": [90, 85, 88, 75, 95]
+      },
+      {
+        "title": "Bachelor of Computer Applications (BCA)",
+        "institution": "XYZ College",
+        "duration": "2019 - 2022",
+        "location": "City, State",
+        "gpa": "8.9",
+        "achievements": [
+          "Best Student Award",
+          "Won National Coding Competition",
+          "Published 2 technical articles"
+        ],
+        "subjects": ["Java", "OS", "DBMS", "CN", "Python"],
+        "performance": [89, 92, 87, 80, 93]
+      }
+    ]
+  },
+  "skills": {
+    "technical": [
+      { "name": "Python", "level": 90, "emoji": "🐍" },
+      { "name": "JavaScript/TypeScript", "level": 85, "emoji": "⚡" },
+      { "name": "React/Next.js", "level": 88, "emoji": "⚛️" },
+      { "name": "SQL/NoSQL", "level": 82, "emoji": "🗄️" },
+      { "name": "Machine Learning", "level": 75, "emoji": "🤖" }
+    ],
+    "soft": [
+      { "name": "Communication", "level": 90, "emoji": "🗣️" },
+      { "name": "Problem Solving", "level": 92, "emoji": "🧩" },
+      { "name": "Leadership", "level": 85, "emoji": "👑" },
+      { "name": "Teamwork", "level": 88, "emoji": "🤝" },
+      { "name": "Adaptability", "level": 87, "emoji": "🔄" }
+    ]
+  },
+  "experience": [
+    {
+      "role": "Java Intern",
+      "company": "Innodeed Software Solutions",
+      "duration": "June 2023 – July 2023",
+      "description": "Worked on Java-based backend modules, learned industrial software practices.",
+      "highlights": [
+        "Developed RESTful APIs using Spring Boot 🚀",
+        "Implemented automated testing with JUnit ✅",
+        "Reduced API response time by 40% ⚡",
+        "Participated in daily stand-ups 🎯"
+      ],
+      "techStack": ["Java", "Spring Boot", "Git", "JUnit", "Agile"],
+      "funAchievement": "Named 'Bug Terminator' by the team 🦸‍♂️"
+    },
+    {
+      "role": "Freelance Data Analyst",
+      "company": "Independent Projects",
+      "duration": "2023 – Present",
+      "description": "Delivering data-driven insights using Python and visualization tools.",
+      "highlights": [
+        "Analyzed customer behavior patterns 📊",
+        "Created interactive dashboards 🎨",
+        "Increased client revenue by 25% 💰",
+        "Built automated data pipelines 🔄"
+      ],
+      "techStack": ["Python", "Pandas", "Tableau", "SQL"],
+      "funAchievement": "Turned messy data into happy clients 🎭"
+    }
+  ],
+  "funEvents": [
+    {
+      "title": "Code & Comedy Night 🎭",
+      "description": "Where debugging meets stand-up comedy! Watch developers try to explain their code while making you laugh.",
+      "date": "September 25, 2025",
+      "location": "Tech Hub Arena",
+      "category": "cultural",
+      "participants": 150,
+      "highlights": [
+        "Live coding challenges with plot twists",
+        "Debug-while-you-dance competition",
+        "Tech puns championship",
+        "Meme creation workshop"
+      ],
+      "emoji": "🎭"
+    },
+    {
+      "title": "Pixel Party Gaming 🎮",
+      "description": "Epic gaming tournaments with a twist - programmers vs designers, who will win?",
+      "date": "October 1, 2025",
+      "location": "Digital Playground",
+      "category": "gaming",
+      "participants": 80,
+      "highlights": [
+        "Code-while-gaming challenges",
+        "VR development showdown",
+        "Retro coding games",
+        "AI vs Human tournaments"
+      ],
+      "emoji": "🎮"
+    },
+    {
+      "title": "Tech Talent Show 🎤",
+      "description": "Showcase your hidden talents! From singing APIs to dancing algorithms.",
+      "date": "October 15, 2025",
+      "location": "Innovation Center",
+      "category": "music",
+      "participants": 50,
+      "highlights": [
+        "Algorithm interpretive dance",
+        "Binary beat boxing",
+        "Code poetry slam",
+        "Tech parody songs"
+      ],
+      "emoji": "🎤"
+    }
+  ],
+  "projects": [
+    {
+      "title": "LalaAm - Smart Agriculture Assistant 🌱",
+      "description": "AI-powered assistant that helps farmers with crop management and more!",
+      "techStack": ["Python", "TensorFlow", "OpenCV", "IoT", "Flask"],
+      "funFeatures": [
+        "Plant mood detector 🌿",
+        "Crop jokes generator 😄",
+        "Dancing sprinkler system 💃",
+        "Weather forecaster with memes 🌤️"
+      ],
+      "demoLink": "https://lalam.herokuapp.com",
+      "githubLink": "https://github.com/yourusername/lalam",
+      "emoji": "🌱"
+    }
+  ],
+  "awards": [
+    {
+      "title": "🏆 Best Innovation Award",
+      "description": "Recognized for developing AI-powered agriculture assistant",
+      "year": "2024",
+      "organization": "Tech Innovation Summit"
+    },
+    {
+      "title": "🥇 Hackathon Winner",
+      "description": "First place in national coding competition",
+      "year": "2023",
+      "organization": "CodeFest National"
+    },
+    {
+      "title": "⭐ Academic Excellence",
+      "description": "Department rank 1 in MCA program",
+      "year": "2024",
+      "organization": "ABC University"
+    },
+    {
+      "title": "🎖️ Leadership Award",
+      "description": "Outstanding leadership in college tech community",
+      "year": "2023",
+      "organization": "Student Council"
+    }
+  ],
+  "services": {
+    "items": [
+      {
+        "title": "🔥 1-on-1 Consulting",
+        "description": "Expert guidance for your tech career journey",
+        "price": "499",
+        "path": "/consulting-payment",
+        "features": [
+          "60-minute personal consultation",
+          "Career roadmap planning",
+          "Tech stack recommendations",
+          "Industry insights & trends",
+          "Follow-up email support"
+        ],
+        "reviews": [
+          {
+            "rating": 5,
+            "comment": "Game-changing session! Helped me pick the right tech stack 🚀",
+            "author": "Happy Coder"
+          },
+          {
+            "rating": 5,
+            "comment": "Amazing insights into industry trends! Worth every penny ⭐",
+            "author": "Tech Enthusiast"
+          }
+        ],
+        "animation": {
+          "emoji": "👨‍💻",
+          "color": "cyan"
+        }
+      },
+      {
+        "title": "🚀 Resume Review",
+        "description": "Stand out to top tech companies",
+        "price": "299",
+        "path": "/product-payment",
+        "features": [
+          "Detailed resume analysis",
+          "ATS optimization tips",
+          "Industry-specific keywords",
+          "Format improvements",
+          "2 revision rounds"
+        ],
+        "reviews": [
+          {
+            "rating": 5,
+            "comment": "Got 3 interview calls after the resume makeover! 📝",
+            "author": "Job Seeker"
+          },
+          {
+            "rating": 4,
+            "comment": "Great suggestions for ATS optimization 👍",
+            "author": "Career Switcher"
+          }
+        ],
+        "animation": {
+          "emoji": "📝",
+          "color": "blue"
+        }
+      },
+      {
+        "title": "🎯 Portfolio Review",
+        "description": "Make your work shine online",
+        "price": "199",
+        "path": "/product-payment",
+        "features": [
+          "Portfolio website audit",
+          "Project presentation tips",
+          "UI/UX suggestions",
+          "Code quality review",
+          "SEO optimization tips"
+        ],
+        "reviews": [
+          {
+            "rating": 5,
+            "comment": "My portfolio looks 10x better now! 🎨",
+            "author": "Web Developer"
+          },
+          {
+            "rating": 5,
+            "comment": "Got great tips for showcasing my projects ✨",
+            "author": "UI Designer"
+          }
+        ],
+        "animation": {
+          "emoji": "🎨",
+          "color": "purple"
+        }
+      }
+    ],
+    "testimonials": [
+      {
+        "text": "The consulting session changed my career trajectory! 🚀",
+        "author": "John Doe",
+        "role": "Full Stack Developer",
+        "emoji": "💫"
+      },
+      {
+        "text": "Best investment in my professional growth! ⭐",
+        "author": "Jane Smith",
+        "role": "Data Scientist",
+        "emoji": "📈"
+      }
+    ],
+    "funFacts": [
+      "Over 500+ developers helped! 👨‍💻",
+      "100% satisfaction rate! 🎯",
+      "24/7 support available! 💪",
+      "Guaranteed results or money back! 💯"
+    ]
+  }
+}

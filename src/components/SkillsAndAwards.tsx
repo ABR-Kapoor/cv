@@ -1,226 +1,332 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { zoomIn } from "../utils/animations";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { unifiedData } from "../data/unifiedData";
+import { Code, Brain, Trophy, Sparkles } from "lucide-react";
+import {
+  FaReact,
+  FaPython,
+  FaJava,
+  FaNodeJs,
+  FaDatabase,
+  FaHtml5,
+  FaCss3Alt,
+  FaJsSquare,
+  FaGitAlt,
+} from "react-icons/fa";
 
-import hardSkillsChart from "../assets/illustrations/hard-skills-chart.png";
-import softSkillsChart from "../assets/illustrations/soft-skills-chart.jpg";
-import completedIcon from "../assets/illustrations/completed-icon.jpg";
+interface Skill {
+  name: string;
+  level: number;
+  emoji: string;
+  category?: string;
+  description?: string;
+}
 
-const staggerContainer = {
-  initial: {},
-  animate: {
-    transition: { staggerChildren: 0.15, delayChildren: 0.3 },
-  },
+const skillIcons: { [key: string]: React.ReactNode } = {
+  "React.js": <FaReact className="text-cyan-400 w-8 h-8" />,
+  Python: <FaPython className="text-yellow-400 w-8 h-8" />,
+  Java: <FaJava className="text-red-500 w-8 h-8" />,
+  "Node.js": <FaNodeJs className="text-green-500 w-8 h-8" />,
+  "SQL (PostgreSQL, MySQL)": <FaDatabase className="text-blue-400 w-8 h-8" />,
+  HTML: <FaHtml5 className="text-orange-500 w-8 h-8" />,
+  CSS: <FaCss3Alt className="text-blue-500 w-8 h-8" />,
+  JavaScript: <FaJsSquare className="text-yellow-300 w-8 h-8" />,
+  Git: <FaGitAlt className="text-orange-400 w-8 h-8" />,
 };
 
-const fadeInUpDelayed = {
-  initial: { opacity: 0, y: 40 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
-};
-
-const SkillsAndAwards: React.FC = () => {
-  const hardSkills = [
-    "Python",
-    "JavaScript",
-    "SQL",
-    "Machine Learning",
-    "React",
-  ];
-  const softSkills = [
-    "Communication",
-    "Problem Solving",
-    "Creativity",
-    "Teamwork",
-    "Attention to Detail",
-  ];
-
-  const awards = [
-    {
-      title: "INAE Hackathon - IIT Bhilai",
-      description:
-        "Secured 3rd position in national-level innovation challenge for LalaAm project.",
-      img: completedIcon,
-    },
-    {
-      title: "Coursera Achiever",
-      description:
-        "Completed 10+ professional courses in data science and AI with distinction.",
-      img: completedIcon,
-    },
-    {
-      title: "Academic Excellence",
-      description:
-        "Achieved top 5% position in college with consistent performance.",
-      img: completedIcon,
-    },
-  ];
+const SkillNode = ({
+                     skill,
+                     index,
+                     isActive,
+                   }: {
+  skill: Skill;
+  index: number;
+  isActive: boolean;
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <>
-      {/* Background glow & particles */}
-      <div className="fixed inset-0 -z-10 bg-gradient-to-tr from-[#1e2025] via-[#121214] to-[#000000]" />
-      <div
-        aria-hidden="true"
-        className="fixed inset-0 -z-20 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at 30% 30%, #ff008080, transparent 40%), radial-gradient(circle at 70% 70%, #7928ca80, transparent 40%)",
-          filter: "blur(150px)",
-        }}
-      />
-
-      <section
-        id="skills"
-        className="min-h-screen py-24 px-8 max-w-7xl mx-auto text-white relative"
+      <motion.div
+          className={`relative cursor-pointer group flex flex-row items-center gap-4 ${
+              isActive ? "z-20" : "z-10"
+          }`}
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 0.9, rotate: 0 }}
+          transition={{
+            delay: index * 0.1,
+            type: "spring",
+            bounce: 0.7,
+            duration: 0.7,
+          }}
+          whileHover={{
+            scale: 1.05,
+            y: -8,
+            boxShadow:
+                "0 0 25px 8px rgba(6,182,212,0.18), 0 0 40px 16px rgba(168,85,247,0.15)",
+            filter: "brightness(1.1)",
+          }}
+          onHoverStart={() => setIsHovered(true)}
+          onHoverEnd={() => setIsHovered(false)}
+          style={{ borderRadius: '1.5rem', background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)', boxShadow: '0 2px 8px 0 rgba(0,0,0,0.12)', border: '1.5px solid #334155', padding: '0.5rem 1.2rem', display: 'flex', alignItems: 'center', minWidth: '220px', minHeight: '88px' }}
       >
-        <motion.h2
-          className="text-6xl font-extrabold mb-20 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-400 bg-clip-text text-transparent drop-shadow-lg tracking-tight"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        {/* Circular Tech Tool Icon */}
+        <div
+            className="relative w-20 h-20 rounded-full bg-gradient-to-br from-slate-800 via-gray-800 to-gray-900 shadow-lg flex items-center justify-center border border-white/20"
         >
-          Skills
-        </motion.h2>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-20"
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-        >
-          {/* Hard Skills */}
+          {/* Animated Ring */}
           <motion.div
-            className="bg-gray-900 bg-opacity-70 p-8 rounded-3xl shadow-[0_20px_50px_rgba(255,105,180,0.3)] hover:shadow-[0_25px_60px_rgba(255,105,180,0.7)] transition-shadow duration-500 cursor-pointer"
-            variants={fadeInUpDelayed}
-            whileHover={{ scale: 1.05 }}
-          >
-            <h3 className="text-4xl font-semibold mb-8 text-pink-400 drop-shadow-md">
-              Hard Skills
-            </h3>
-            <motion.img
-              src={hardSkillsChart}
-              alt="Hard Skills Chart"
-              className="w-full h-auto rounded-2xl shadow-lg mb-8 border-4 border-pink-600"
-              whileHover={{ scale: 1.07, rotate: 2 }}
-              transition={{ type: "spring", stiffness: 120 }}
-            />
-            <ul className="space-y-3 text-left text-xl font-medium text-pink-200">
-              {hardSkills.map((skill, idx) => (
-                <motion.li
-                  key={idx}
-                  className="flex items-center gap-3"
-                  whileHover={{ scale: 1.12, color: "#fb7185" }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <svg
-                    className="w-6 h-6 text-pink-400 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    ></path>
-                  </svg>
-                  {skill}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Soft Skills */}
-          <motion.div
-            className="bg-gray-900 bg-opacity-70 p-8 rounded-3xl shadow-[0_20px_50px_rgba(110,231,183,0.3)] hover:shadow-[0_25px_60px_rgba(110,231,183,0.7)] transition-shadow duration-500 cursor-pointer"
-            variants={fadeInUpDelayed}
-            whileHover={{ scale: 1.05 }}
-          >
-            <h3 className="text-4xl font-semibold mb-8 text-green-400 drop-shadow-md">
-              Soft Skills
-            </h3>
-            <motion.img
-              src={softSkillsChart}
-              alt="Soft Skills Chart"
-              className="w-full h-auto rounded-2xl shadow-lg mb-8 border-4 border-green-500"
-              whileHover={{ scale: 1.07, rotate: -2 }}
-              transition={{ type: "spring", stiffness: 120 }}
-            />
-            <ul className="space-y-3 text-left text-xl font-medium text-green-200">
-              {softSkills.map((skill, idx) => (
-                <motion.li
-                  key={idx}
-                  className="flex items-center gap-3"
-                  whileHover={{ scale: 1.12, color: "#4ade80" }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <svg
-                    className="w-6 h-6 text-green-400 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    ></path>
-                  </svg>
-                  {skill}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      <section
-        id="awards"
-        className="min-h-screen py-24 px-8 max-w-7xl mx-auto text-white relative"
-      >
-        <motion.h2
-          className="text-6xl font-extrabold mb-20 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-200 bg-clip-text text-transparent drop-shadow-lg tracking-wide"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          Awards
-        </motion.h2>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-14"
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-        >
-          {awards.map((award, index) => (
+              className="absolute inset-0 rounded-full border-2 border-transparent"
+              style={{
+                background: `conic-gradient(from 0deg, transparent, ${
+                    skill.level >= 90
+                        ? "#fbbf24"
+                        : skill.level >= 75
+                            ? "#a855f7"
+                            : skill.level >= 60
+                                ? "#06b6d4"
+                                : "#6b7280"
+                }, transparent)`,
+              }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          />
+          {/* Icon */}
+          <div className="relative w-14 h-14 rounded-full bg-slate-900/90 backdrop-blur-sm flex items-center justify-center border border-white/10">
+            {skillIcons[skill.name] || (
+                <span className="text-3xl filter drop-shadow-lg">{skill.emoji}</span>
+            )}
+          </div>
+        </div>
+        {/* Skill Name */}
+        <span className="text-lg text-cyan-300 font-semibold drop-shadow-lg ml-3">
+        {skill.name}
+      </span>
+        {/* Tooltip */}
+        <AnimatePresence>
+          {isHovered && (
             <motion.div
-              key={index}
-              className="bg-gradient-to-b from-yellow-900 via-yellow-800 to-yellow-700 p-8 rounded-3xl shadow-[0_15px_40px_rgba(245,158,11,0.6)] hover:shadow-[0_25px_60px_rgba(245,158,11,0.9)] transition-shadow duration-400 cursor-pointer"
-              variants={zoomIn}
-              whileHover={{ scale: 1.08 }}
-              transition={{ type: "spring", stiffness: 160 }}
+              initial={{ opacity: 0, y: -12, scale: 0.95 }}
+              animate={{ opacity: 1, y: -24, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.95 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="absolute left-1/2 z-30 px-5 py-4 rounded-2xl border border-cyan-400/40 shadow-2xl w-80 text-gray-100 text-base text-left pointer-events-auto bg-gradient-to-br from-slate-900 via-gray-800 to-gray-900"
+              style={{
+                bottom: 'calc(100% + 16px)',
+                transform: 'translateX(-50%)',
+                boxShadow: "0 8px 32px 0 rgba(6,182,212,0.18), 0 0 0 4px rgba(168,85,247,0.10)",
+                fontWeight: 500,
+              }}
             >
-              <img
-                src={award.img}
-                alt={award.title}
-                className="w-24 h-24 mx-auto mb-6 rounded-full shadow-xl border-4 border-yellow-400 hover:scale-110 transition-transform duration-300"
-              />
-              <h3 className="text-3xl font-extrabold mb-3 text-yellow-300 drop-shadow-md">
-                {award.title}
-              </h3>
-              <p className="text-yellow-100 text-lg leading-relaxed">{award.description}</p>
+              <div className="font-bold text-cyan-400 mb-1">{skill.name}</div>
+              <div className="mb-2">{skill.description || "No description available."}</div>
+              {skill.category && (
+                <div className="mt-2 text-purple-400">Category: {skill.category}</div>
+              )}
             </motion.div>
-          ))}
+          )}
+        </AnimatePresence>
+      </motion.div>
+  );
+};
+
+const SkillTree = ({
+                     skills,
+                     title,
+                     icon,
+                   }: {
+  skills: Skill[];
+  title: string;
+  icon: React.ReactNode;
+}) => {
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+
+  return (
+      <div className="glass-morphism-card rounded-2xl p-8 border border-white/10">
+        {/* Header */}
+        <motion.div
+            className="flex items-center gap-3 mb-8"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+        >
+          <div className="p-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg">
+            {icon}
+          </div>
+          <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+            {title}
+          </h3>
         </motion.div>
+
+        {/* Skills Grid */}
+        <div className="relative">
+          <motion.div
+              className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400/30 via-blue-500/50 to-purple-500/30"
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ delay: 0.5, duration: 1.5 }}
+          />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative">
+            {skills.map((skill, index) => (
+                <SkillNode
+                    key={skill.name}
+                    skill={skill}
+                    index={index}
+                    isActive={selectedSkill === skill.name}
+                />
+            ))}
+          </div>
+        </div>
+      </div>
+  );
+};
+
+const SkillsAndAwards = () => {
+  const [activeTab, setActiveTab] = useState<"technical" | "soft">("technical");
+
+  return (
+      <section className="py-20 bg-gray-900 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Section Header */}
+          <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+          >
+            <motion.div
+                className="text-6xl mb-4 cursor-pointer animate-float"
+                whileHover={{ scale: 1.2, rotate: [0, -10, 10, 0] }}
+            >
+              🌟
+            </motion.div>
+            <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-4 animate-gradient">
+              Skill Constellation
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+              Navigate through my skill universe - each star represents mastery
+              earned through dedication 🚀
+            </p>
+          </motion.div>
+
+          {/* Tab Switch */}
+          <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="flex justify-center mb-12"
+          >
+            <div className="glass-morphism-card rounded-full p-2 border border-white/20">
+              <motion.button
+                  onClick={() =>
+                      setActiveTab(activeTab === "technical" ? "soft" : "technical")
+                  }
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                      activeTab === "technical"
+                          ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg"
+                          : "text-gray-400 hover:text-white"
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+              >
+                {activeTab === "technical" ? (
+                    <Brain className="w-5 h-5" />
+                ) : (
+                    <Code className="w-5 h-5" />
+                )}
+                {activeTab === "technical" ? "Soft Skills" : "Tech Skills"}
+              </motion.button>
+            </div>
+          </motion.div>
+
+          {/* Skills Tree */}
+          <AnimatePresence mode="wait">
+            <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.5 }}
+            >
+              {activeTab === "technical" ? (
+                  <SkillTree
+                      skills={unifiedData.skills.technical}
+                      title="Technical Arsenal"
+                      icon={<Code className="w-6 h-6 text-white" />}
+                  />
+              ) : (
+                  <SkillTree
+                      skills={unifiedData.skills.soft}
+                      title="Human Superpowers"
+                      icon={<Brain className="w-6 h-6 text-white" />}
+                  />
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Awards */}
+          <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-20"
+          >
+            <div className="text-center mb-12">
+              <motion.div className="text-5xl mb-4 animate-bounce-gentle">🏆</motion.div>
+              <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-4">
+                Hall of Fame
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {unifiedData.awards.map((award, index) => (
+                  <motion.div
+                      key={award.title}
+                      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                      whileHover={{
+                        scale: 1.04,
+                        y: -6,
+                        boxShadow: "0 12px 30px rgba(251,191,36,0.25)",
+                        borderColor: "rgba(251,191,36,0.6)",
+                        transition: { duration: 0.3, ease: "easeOut" },
+                      }}
+                      whileTap={{ scale: 0.97, transition: { duration: 0.2 } }}
+                      className="glass-morphism-card rounded-xl p-6 border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500">
+                        <Trophy className="w-5 h-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-white group-hover:text-yellow-400 transition-colors">
+                        {award.title}
+                      </h4>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-3">{award.description}</p>
+                    <div className="flex items-center justify-between">
+                  <span className="text-xs text-yellow-400 font-semibold">
+                    {award.year}
+                  </span>
+                      <div className="flex gap-1">
+                        {[...Array(3)].map((_, i) => (
+                            <Sparkles
+                                key={i}
+                                className="w-3 h-3 text-yellow-400 animate-pulse"
+                                style={{ animationDelay: `${i * 0.2}s` }}
+                            />
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </section>
-    </>
   );
 };
 

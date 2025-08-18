@@ -1,11 +1,24 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="src/assets/goku.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-    <link href="/src/index.css" rel="stylesheet" />
+    <title>Abeer's Portfolio</title>
+    <style>
+      /* Initial styles to prevent FOUC (Flash of Unstyled Content) */
+      body {
+        background-color: #111827; /* bg-gray-900 */
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+      }
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

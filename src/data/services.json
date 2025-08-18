@@ -1,0 +1,24 @@
+[
+  {
+    "title": "Business Consulting",
+    "description": "Expert advice to help you scale, optimize operations, and drive growth. Includes strategy sessions and actionable plans for startups and enterprises.",
+    "price": "4999",
+    "images": ["/src/assets/illustrations/consultingPay.jpg"],
+    "feedbacks": ["Helped us double our revenue!", "Professional and insightful.", "Highly recommended for startups."]
+  },
+  {
+    "title": "Web Development",
+    "description": "Custom websites and web apps built for performance, security, and conversion. Includes design, development, and launch support for your business.",
+    "price": "14999",
+    "images": ["/src/assets/illustrations/project1.jpg"],
+    "feedbacks": ["Our new site looks amazing!", "Fast delivery and great support.", "Best dev team we've worked with."]
+  },
+  {
+    "title": "Technical Support",
+    "description": "24/7 support for your business tech stack. Includes troubleshooting, updates, and proactive monitoring for peace of mind.",
+    "price": "2999",
+    "images": ["/src/assets/illustrations/award2-trophy.jpg"],
+    "feedbacks": ["Quick response times.", "Solved every issue.", "Reliable and friendly."]
+  }
+]
+
