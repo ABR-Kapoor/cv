@@ -4,11 +4,14 @@ import Footer from "./components/Footer";
 import LoadingScreen from "./components/LoadingScreen";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./Routes/AppRoutes";
+import personalInfo from "./data/personal_info.json"; // Add this import
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -40,11 +43,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className={`min-h-screen flex flex-col ${darkMode ? "bg-gray-900 text-white" : "bg-[#FFF8E7] text-[#7B5E3B]"} glass`}>
-        <Navbar darkMode={darkMode} onToggleDarkMode={() => setDarkMode((prev) => !prev)} />
+        <Navbar />
         <main className="flex-grow">
           <AppRoutes darkMode={darkMode} />
         </main>
-        <Footer darkMode={darkMode} />
+        <Footer personalInfo={personalInfo} darkMode={darkMode} />
         {showScrollTop && (
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

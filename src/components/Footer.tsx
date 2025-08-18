@@ -9,6 +9,7 @@ interface FooterProps {
     github: string;
     linkedin: string;
     email: string;
+    whatsapp: string;
   };
 }
 
@@ -23,7 +24,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode = true, personalInfo }) => (
         {/* Social Links */}
         <div className="flex space-x-6">
           <a
-              href="https://github.com/ABR-Kapoor/"
+              href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -34,7 +35,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode = true, personalInfo }) => (
             />
           </a>
           <a
-              href="https://linkedin.com/in/abeer-kapoor/"
+              href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -44,7 +45,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode = true, personalInfo }) => (
                 className={darkMode ? "text-cyan-400" : "text-[#7B5E3B]"}
             />
           </a>
-          <a href={`mailto:akabrkapoor@gmail.com`} aria-label="Email">
+          <a href={`mailto:${personalInfo.email}`} aria-label="Email">
             <Mail
                 size={22}
                 className={darkMode ? "text-pink-500" : "text-[#BFA06A]"}
@@ -65,7 +66,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode = true, personalInfo }) => (
                   darkMode ? "text-white" : "text-[#7B5E3B]"
               }`}
           >
-          Abeer Kapoor
+          {personalInfo.name}
         </span>
         </p>
 

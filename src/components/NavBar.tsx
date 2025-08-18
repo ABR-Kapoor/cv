@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaLinkedin, FaDownload, FaRegLightbulb, FaLightbulb } from "react-icons/fa";
+import { FaLinkedin, FaDownload, FaRegLightbulb } from "react-icons/fa";
+import personalInfo from '../data/personal_info.json'; // Add this import
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -27,7 +28,7 @@ const Navbar: React.FC = () => {
           aria-label="Homepage"
           onClick={() => setMenuOpen(false)}
         >
-          Abeer Kapoor's Portfolio
+          {personalInfo.name}'s Portfolio
         </Link>
         {/* Navigation Links and Icons */}
         <div className="hidden md:flex space-x-8 font-semibold text-gray-200 items-center">
@@ -43,7 +44,7 @@ const Navbar: React.FC = () => {
             </Link>
           ))}
           {/* LinkedIn Icon */}
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn">
             <FaLinkedin size={22} className="text-cyan-400 hover:text-white transition-colors duration-300" />
           </a>
           {/* Download Resume Icon */}

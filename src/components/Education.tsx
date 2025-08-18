@@ -12,6 +12,7 @@ const collegeImages: Record<string, string> = {
 
 // const cardBgClass = "bg-gradient-to-r from-gray-900 to-blue-900";
 
+
 const EducationCard = ({
   edu,
   imgSrc,
