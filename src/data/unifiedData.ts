@@ -5,9 +5,6 @@ import experience from './experience.json';
 import projects from './projects.json';
 import technicalSkills from './technical_skills.json';
 import achievements from './achievements.json';
-import certifications from './certifications.json';
-import memberships from './memberships.json';
-import professionalSummary from './professional_summary.json';
 
 // Skill level mapping helper - Based on your real expertise
 const getSkillLevel = (skill: string): number => {

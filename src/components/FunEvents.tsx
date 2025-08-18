@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, MapPin, Users, Sparkles } from "lucide-react";
+import { Calendar, MapPin, Sparkles } from "lucide-react";
 import { unifiedData } from "../data/unifiedData"; // Import unifiedData directly
 
 const FunEvents = () => {
