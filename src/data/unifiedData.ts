@@ -254,7 +254,7 @@ export const unifiedData = {
   })),
 
   // Awards from achievements.json - Your real achievements
-  awards: achievements.map((achievement, index) => {
+  awards: achievements.map((achievement) => {
     if (achievement.includes('Hackathon')) {
       return {
         title: '🏆 Hackathon Winner - IIT Bhilai',

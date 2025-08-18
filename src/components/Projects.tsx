@@ -49,10 +49,10 @@ const Projects = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
                     {unifiedData.projects.map((project, index) => (
                         <motion.div
-                            key={project.title}
+                            key={index}
                             className="rounded-xl shadow-lg overflow-hidden bg-gray-800 text-gray-300 border border-gray-700 cursor-pointer"
                             whileHover={{ scale: 1.02 }}
-                            onClick={() => setSelectedProject(index)} // Fix: Add this onClick handler
+                            onClick={() => setSelectedProject(index)}
                         >
                             <OptimizedImage src={projectImages[index % projectImages.length]} alt={project.title} className="w-full h-56 object-cover" />
                             <div className="p-6">
@@ -147,7 +147,7 @@ const Projects = () => {
                                                 <div className="mb-6">
                                                     <h4 className="text-xl font-semibold text-cyan-200 mb-3">Technology Stack</h4>
                                                     <div className="flex flex-wrap gap-3">
-                                                        {unifiedData.projects[selectedProject].techStack.map((tech, idx) => (
+                                                        {unifiedData.projects[selectedProject].techStack.map((tech, ) => (
                                                             <span key={tech} className="px-4 py-2 bg-slate-800 text-cyan-300 rounded-lg border border-slate-700 text-center font-medium shadow">
                                                                 {tech}
                                                             </span>

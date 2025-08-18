@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import LoadingScreen from "./components/LoadingScreen";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./Routes/AppRoutes";
-import personalInfo from "./data/personal_info.json"; // Add this import
+import personalInfo from "./data/personal_info.json";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +45,7 @@ const App = () => {
       <div className={`min-h-screen flex flex-col ${darkMode ? "bg-gray-900 text-white" : "bg-[#FFF8E7] text-[#7B5E3B]"} glass`}>
         <Navbar />
         <main className="flex-grow">
-          <AppRoutes darkMode={darkMode} />
+          <AppRoutes />
         </main>
         <Footer personalInfo={personalInfo} darkMode={darkMode} />
         {showScrollTop && (

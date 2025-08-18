@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaLinkedin, FaDownload, FaRegLightbulb } from "react-icons/fa";
-import personalInfo from '../data/personal_info.json'; // Add this import
+import { FaLinkedin, FaGithub, FaDownload } from "react-icons/fa6";
+import personalInfo from '../data/personal_info.json';
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -10,7 +10,7 @@ const navLinks = [
 ];
 
 const Navbar: React.FC = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [, setMenuOpen] = useState(false);
 
   return (
     <>
@@ -47,16 +47,14 @@ const Navbar: React.FC = () => {
           <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn">
             <FaLinkedin size={22} className="text-cyan-400 hover:text-white transition-colors duration-300" />
           </a>
+          {/* GitHub Icon */}
+          <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" title="GitHub">
+            <FaGithub size={22} className="text-purple-400 hover:text-white transition-colors duration-300" />
+          </a>
           {/* Download Resume Icon */}
           <a href="/src/assets/ABR-CV25.11.pdf" download title="Download Resume">
             <FaDownload size={22} className="text-purple-400 hover:text-white transition-colors duration-300" />
           </a>
-          {/* Light/Dark mode toggle icon */}
-          <span onClick={() => window.dispatchEvent(new CustomEvent('toggleDarkMode'))} style={{ cursor: 'pointer' }}>
-            {window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? <FaRegLightbulb size={22} className="text-cyan-400 hover:text-white transition-colors duration-300" />
-              : <FaRegLightbulb size={22} className="text-gray-400" />}
-          </span>
         </div>
       </motion.nav>
     </>

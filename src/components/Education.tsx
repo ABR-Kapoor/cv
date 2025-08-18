@@ -10,8 +10,15 @@ const collegeImages: Record<string, string> = {
   "Bhilai Institute of Technology College (Bhilai)": college1,
 };
 
-// const cardBgClass = "bg-gradient-to-r from-gray-900 to-blue-900";
-
+type EducationType = {
+  degree: string;
+  college: string;
+  year: string;
+  cgpa?: string;
+  status?: string;
+  achievements: string[];
+  subjects: string[];
+};
 
 const EducationCard = ({
   edu,
@@ -19,7 +26,7 @@ const EducationCard = ({
   flipped,
   onFlip,
 }: {
-  edu: any;
+  edu: EducationType;
   imgSrc: string;
   flipped: boolean;
   onFlip: () => void;
@@ -141,7 +148,7 @@ const Education = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full max-w-6xl">
-          {educationData.map((edu: any, idx: number) => {
+          {educationData.map((edu: EducationType, idx: number) => {
             const imgSrc = collegeImages[edu.college] || college1;
             return (
               <EducationCard
