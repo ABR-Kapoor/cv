@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import educationData from "../data/education.json";
 import { FaCalendarAlt, FaStar, FaMedal, FaBookOpen } from "react-icons/fa";
-import college2 from "../assets/illustrations/college1.png";
-import college1 from "../assets/illustrations/college2.png";
+import college1 from "../assets/illustrations/college1.png";
+import college2 from "../assets/illustrations/college2.png";
 
 const collegeImages: Record<string, string> = {
-  "Govt. V.Y.T. Post Graduate Autonomous College (Durg)": college1,
-  "Bhilai Institute of Technology College (Bhilai)": college2,
+  "Govt. V.Y.T. Post Graduate Autonomous College (Durg)": college2,
+  "Bhilai Institute of Technology College (Bhilai)": college1,
 };
 
 // const cardBgClass = "bg-gradient-to-r from-gray-900 to-blue-900";
