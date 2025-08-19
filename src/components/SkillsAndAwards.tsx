@@ -138,7 +138,7 @@ const SkillTree = ({
   title: string;
   icon: React.ReactNode;
 }) => {
-  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [selectedSkill] = useState<string | null>(null);
 
   return (
       <div className="glass-morphism-card rounded-2xl p-8 border border-white/10">

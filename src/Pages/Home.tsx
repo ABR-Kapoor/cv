@@ -11,7 +11,6 @@ import SkillsAndAwards from "../components/SkillsAndAwards";
 import FunEvents from "../components/FunEvents";
 
 const Home: React.FC = () => {
-  // Handle hash navigation
   useEffect(() => {
     if (window.location.hash) {
       const element = document.getElementById(window.location.hash.slice(1));

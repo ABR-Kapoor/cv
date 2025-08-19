@@ -5,7 +5,7 @@ import servicesData from '../data/services.json';
 import { useNavigate } from 'react-router-dom';
 
 const Services: React.FC = () => {
-  const navigate = useNavigate();
+  // ...existing code...
   const services = servicesData;
 
   return (
