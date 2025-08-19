@@ -2,7 +2,6 @@ import React from "react";
 import ServiceCard from "../components/ServiceCard";
 import { motion } from "framer-motion";
 import servicesData from '../data/services.json';
-import { useNavigate } from 'react-router-dom';
 
 const Services: React.FC = () => {
   // ...existing code...
