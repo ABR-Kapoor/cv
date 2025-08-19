@@ -1,6 +1,6 @@
 // src/components/ContactMe.tsx
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Mail, Send, CheckCircle, MessageSquare } from 'lucide-react';
 import content from '../data/content.json';
 
@@ -14,7 +14,6 @@ const ContactMe = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [currentEmoji, setCurrentEmoji] = useState('👋');
 
-  const emojis = ['👋', '💌', '🚀', '✨', '💻', '🎯'];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,7 +90,7 @@ const ContactMe = () => {
                     onChange={(e) => setFormState(prev => ({ ...prev, name: e.target.value }))}
                     onFocus={() => handleInputFocus('😊')}
                     className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-shadow"
-                    placeholder="John Doe"
+                    placeholder="Watari Kapoor"
                     whileFocus={{ scale: 1.02 }}
                   />
                 </div>
@@ -106,7 +105,7 @@ const ContactMe = () => {
                     onChange={(e) => setFormState(prev => ({ ...prev, email: e.target.value }))}
                     onFocus={() => handleInputFocus('📧')}
                     className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-shadow"
-                    placeholder="john@example.com"
+                    placeholder="watari.kapoor@hehe.com"
                     whileFocus={{ scale: 1.02 }}
                   />
                 </div>

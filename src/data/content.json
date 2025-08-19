@@ -1,100 +1,154 @@
 {
   "personal": {
-    "name": "Radhe",
-    "title": "Future-ready Technocrat",
-    "tagline": "MCA Student • Data Science & AI Enthusiast • Hackathon Winner",
-    "email": "your.email@example.com",
+    "name": "Abeer Kapoor",
+    "title": "Industrial-level Software & Data Engineer",
+    "tagline": "Skilled in Java, Python, and full-stack development. Hackathon winner.",
+    "email": "akabrkapoor@gmail.com",
+    "phone": "9770075755",
     "location": "India",
-    "socialLinks": {
-      "github": "https://github.com/yourusername",
-      "linkedin": "https://linkedin.com/in/yourusername",
-      "twitter": "https://twitter.com/yourusername",
-      "instagram": "https://instagram.com/yourusername"
-    },
-    "funFacts": [
-      "Can debug with one eye closed 🧑‍💻",
-      "Professional pizza debugger 🍕",
-      "Turns coffee into code ☕",
-      "Bug whisperer 🐛",
-      "Keyboard ninja ⌨️"
-    ]
-  },
-  "education": {
-    "degrees": [
-      {
-        "title": "Master of Computer Applications (MCA)",
-        "institution": "ABC University",
-        "duration": "2022 - 2024",
-        "location": "City, State",
-        "gpa": "9.2",
-        "achievements": [
-          "Department Rank 1",
-          "Research paper published in IEEE",
-          "Led college tech community"
-        ],
-        "subjects": ["DS", "ML", "AI", "Cloud", "DSA"],
-        "performance": [90, 85, 88, 75, 95]
-      },
-      {
-        "title": "Bachelor of Computer Applications (BCA)",
-        "institution": "XYZ College",
-        "duration": "2019 - 2022",
-        "location": "City, State",
-        "gpa": "8.9",
-        "achievements": [
-          "Best Student Award",
-          "Won National Coding Competition",
-          "Published 2 technical articles"
-        ],
-        "subjects": ["Java", "OS", "DBMS", "CN", "Python"],
-        "performance": [89, 92, 87, 80, 93]
-      }
-    ]
-  },
-  "skills": {
-    "technical": [
-      { "name": "Python", "level": 90, "emoji": "🐍" },
-      { "name": "JavaScript/TypeScript", "level": 85, "emoji": "⚡" },
-      { "name": "React/Next.js", "level": 88, "emoji": "⚛️" },
-      { "name": "SQL/NoSQL", "level": 82, "emoji": "🗄️" },
-      { "name": "Machine Learning", "level": 75, "emoji": "🤖" }
+    "socialLinks": [
+      { "type": "github", "url": "https://github.com/ABR-Kapoor" },
+      { "type": "linkedin", "url": "https://www.linkedin.com/in/abeer-kapoor/" },
+      { "type": "whatsapp", "url": "https://wa.me/9770075755" }
     ],
-    "soft": [
-      { "name": "Communication", "level": 90, "emoji": "🗣️" },
-      { "name": "Problem Solving", "level": 92, "emoji": "🧩" },
-      { "name": "Leadership", "level": 85, "emoji": "👑" },
-      { "name": "Teamwork", "level": 88, "emoji": "🤝" },
-      { "name": "Adaptability", "level": 87, "emoji": "🔄" }
+    "funFacts": [
+      "Rank #1 in BCA final",
+      "Honored by INAE, New Delhi",
+      "Hackathon Winner (IIT Bhilai)",
+      "Turns coffee into code",
+      "Bug whisperer"
+    ]
+  },
+  "education": [
+    {
+      "college": "Govt. V.Y.T. Post Graduate Autonomous College (Durg)",
+      "degree": "BCA - Bachelor's degree in Computer Applications",
+      "cgpa": "8.2",
+      "year": "2021-24",
+      "subjects": [
+        "Data Structures",
+        "Database Management Systems",
+        "Operating Systems",
+        "Software Engineering",
+        "Computer Networks",
+        "Python Programming"
+      ],
+      "achievements": [
+        "CGPA: 8.2/10 - Excellent performance",
+        "Rank #1 in BCA final",
+        "Active participation in technical events and debates"
+      ]
+    },
+    {
+      "college": "Bhilai Institute of Technology College (Bhilai)",
+      "degree": "Master’s in Computer Application",
+      "year": "2024-26",
+      "status": "Ongoing",
+      "subjects": [
+        "Advanced Java",
+        "Operating Systems",
+        "Software Engineering",
+        "Computer Networks",
+        "Artificial Intelligence",
+        "Advanced Database Systems"
+      ],
+      "achievements": [
+        "Hosting events as part of Association of MCA",
+        "Executive member, MCA Student Association",
+        "Hackathon Winner (IIT Bhilai, Youth Conclave 2024)",
+        "Honored by Indian National Academy of Engineering (INAE), New Delhi"
+      ]
+    }
+  ],
+  "skills": {
+    "soft_skills": [
+      "Leadership",
+      "Self-Learner",
+      "Good at Negotiations",
+      "Managerial skills",
+      "Great prompt engineer",
+      "Questioning skill",
+      "Observation"
+    ],
+    "languages": [
+      "Java",
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "SQL (PostgreSQL, MySQL)",
+      "HTML",
+      "CSS"
+    ],
+    "frameworks_libraries": [
+      "React.js",
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "Spring Boot",
+      "Tailwind CSS",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+      "Matplotlib"
+    ],
+    "cloud_devops": [
+      "AWS (EC2, S3)",
+      "Docker",
+      "Firebase",
+      "Git/GitHub"
+    ],
+    "databases": [
+      "MongoDB",
+      "PostgreSQL",
+      "Firebase Firestore"
+    ],
+    "developer_tools": [
+      "Git",
+      "VS Code",
+      "Visual Studio",
+      "PyCharm",
+      "Net beans",
+      "Neon",
+      "Eclipse",
+      "Cursor",
+      "Clerk",
+      "Telegram Bot-Father",
+      "Google Firebase",
+      "FiGMA",
+      "Government APIs",
+      "ChatGPT",
+      "Gemini pro",
+      "Copilot",
+      "Perplexity",
+      "WhatsApp API",
+      "Payment gateway",
+      "Pinata for Web3 as IPFS"
+    ],
+    "other_tools": [
+      "Jupyter",
+      "VS Code",
+      "Figma",
+      "REST APIs",
+      "Telegram Bot API",
+      "Postman"
+    ],
+    "libraries": [
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "SqlConnection",
+      "NLP",
+      "RAG",
+      "Fine tuning",
+      "Scikit"
     ]
   },
   "experience": [
     {
-      "role": "Java Intern",
-      "company": "Innodeed Software Solutions",
-      "duration": "June 2023 – July 2023",
-      "description": "Worked on Java-based backend modules, learned industrial software practices.",
-      "highlights": [
-        "Developed RESTful APIs using Spring Boot 🚀",
-        "Implemented automated testing with JUnit ✅",
-        "Reduced API response time by 40% ⚡",
-        "Participated in daily stand-ups 🎯"
-      ],
-      "techStack": ["Java", "Spring Boot", "Git", "JUnit", "Agile"],
-      "funAchievement": "Named 'Bug Terminator' by the team 🦸‍♂️"
-    },
-    {
-      "role": "Freelance Data Analyst",
-      "company": "Independent Projects",
-      "duration": "2023 – Present",
-      "description": "Delivering data-driven insights using Python and visualization tools.",
-      "highlights": [
-        "Analyzed customer behavior patterns 📊",
-        "Created interactive dashboards 🎨",
-        "Increased client revenue by 25% 💰",
-        "Built automated data pipelines 🔄"
-      ],
-      "techStack": ["Python", "Pandas", "Tableau", "SQL"],
-      "funAchievement": "Turned messy data into happy clients 🎭"
+      "role": "Intern",
+      "company": "Innodeed Software Solution",
+      "duration": "July 2023 - August",
+      "length": "4 months"
     }
   ],
   "funEvents": [
@@ -146,18 +200,28 @@
   ],
   "projects": [
     {
-      "title": "LalaAm - Smart Agriculture Assistant 🌱",
-      "description": "AI-powered assistant that helps farmers with crop management and more!",
-      "techStack": ["Python", "TensorFlow", "OpenCV", "IoT", "Flask"],
-      "funFeatures": [
-        "Plant mood detector 🌿",
-        "Crop jokes generator 😄",
-        "Dancing sprinkler system 💃",
-        "Weather forecaster with memes 🌤️"
-      ],
-      "demoLink": "https://lalam.herokuapp.com",
-      "githubLink": "https://github.com/yourusername/lalam",
-      "emoji": "🌱"
+      "title": "Hackathon Winner",
+      "location": "IIT Bhilai",
+      "date": "December 2024",
+      "details": "Led the prototype of a gamified mobile app to reduce screen addiction in kids (ages 4–12)..."
+    },
+    {
+      "title": "Slobby : Ai Expert System, Business Ecosystem provider",
+      "version": "v1",
+      "date": "April 2025",
+      "details": "Developed a full-stack app that guided 50+ users in converting business ideas into AI-generated task roadmaps..."
+    },
+    {
+      "title": "Anbiden_Now_bot",
+      "platform": "Telegram bot",
+      "date": "June 2025",
+      "details": "Built a Telegram bot using Python, asyncio, and ConversationHandler for secure, real-time anonymous chats..."
+    },
+    {
+      "title": "Photogram",
+      "platform": "Web2 Social media platform",
+      "date": "May 2025",
+      "details": "Built a real-time social media platform using React.js, Firebase, and Material UI for content sharing and discovery..."
     }
   ],
   "awards": [

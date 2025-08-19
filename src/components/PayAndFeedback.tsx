@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiX } from "react-icons/fi";
+// ...existing code...
 
 interface IService {
   title: string;
