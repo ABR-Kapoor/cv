@@ -16,7 +16,7 @@ const FloatingNavCard: React.FC = () => {
       >
         {/* Rupee Icon */}
         <a
-          href="/service"
+          href="/services"
           aria-label="Go to Service page"
           className="flex flex-col items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400"
         >

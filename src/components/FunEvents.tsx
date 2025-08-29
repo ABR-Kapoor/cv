@@ -25,7 +25,7 @@ const FunEvents = () => {
                         🎉
                     </motion.div>
                     <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
-                        Fun & Games @ Campus
+                        Fun & Games
                     </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Where serious tech meets serious fun! 🚀

@@ -42,18 +42,18 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                 role="button"
                 tabIndex={0}
                 aria-label={`View details for ${title}`}
-                className="group flex flex-col justify-between h-full p-6 rounded-2xl bg-gray-800/50 border border-gray-700 cursor-pointer transition-all duration-300 ease-in-out hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10"
+                className="group flex flex-col justify-between h-full p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-gray-800/50 border border-gray-700 cursor-pointer transition-all duration-300 ease-in-out hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/10"
                 whileHover={{ y: -8, transition: { type: "spring", stiffness: 300 } }}
             >
                 {/* Main Content */}
                 <div>
                     {/* Title */}
-                    <h3 className="text-2xl font-bold mb-3 text-cyan-300 group-hover:text-cyan-200 transition-colors">
+                    <h3 className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3 text-cyan-300 group-hover:text-cyan-200 transition-colors text-center">
                         {title}
                     </h3>
 
                     {/* Description - Clamped to 3 lines to keep card heights consistent */}
-                    <p className="mb-6 text-gray-400 line-clamp-3">
+                    <p className="mb-4 sm:mb-6 text-gray-400 line-clamp-3 text-xs sm:text-base text-center">
                         {description}
                     </p>
                 </div>
@@ -61,17 +61,17 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                 {/* Footer section of the card */}
                 <div className="mt-auto">
                     {/* Price */}
-                    <div className="flex items-center gap-2 mb-4">
-                        <Tag className="w-5 h-5 text-purple-400" />
-                        <p className="font-semibold text-2xl text-purple-300">
+                    <div className="flex items-center justify-center gap-1 sm:gap-2 mb-2 sm:mb-4">
+                        <Tag className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
+                        <p className="font-semibold text-base sm:text-2xl text-purple-300">
                             ₹{numericPrice.toLocaleString('en-IN')}
                         </p>
                     </div>
 
                     {/* Call to Action */}
-                    <div className="flex items-center text-cyan-400 font-semibold">
+                    <div className="flex items-center justify-center text-cyan-400 font-semibold text-xs sm:text-base">
                         <span>View Details</span>
-                        <ArrowRight className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" />
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2 transform transition-transform duration-300 group-hover:translate-x-1" />
                     </div>
                 </div>
             </motion.div>
