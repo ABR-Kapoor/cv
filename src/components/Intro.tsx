@@ -80,15 +80,15 @@ const Intro = () => {
           </a>
           {/* Download CV */}
           <a
-            href="/ABR-CV25-11.pdf"
+            href="/ABR-CV25-12.pdf"
             className="flex items-center gap-1 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-gray-900 text-purple-400 border border-purple-700 shadow-md hover:shadow-purple-500/60 hover:bg-purple-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-200 font-medium hover:drop-shadow-[0_0_12px_rgba(168,85,247,0.7)]"
             aria-label="Download CV"
             onClick={(e) => {
               e.preventDefault();
-              window.open("/ABR-CV25-11.pdf", "_blank");
+              window.open("/ABR-CV25-12.pdf", "_blank");
               const link = document.createElement("a");
-              link.href = "/ABR-CV25-11.pdf";
-              link.download = "ABR-CV25-11.pdf";
+              link.href = "/ABR-CV25-12.pdf";
+              link.download = "Abeer-Kapoor-Resume.pdf";
               document.body.appendChild(link);
               link.click();
               document.body.removeChild(link);

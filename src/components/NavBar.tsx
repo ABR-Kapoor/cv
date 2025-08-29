@@ -53,13 +53,13 @@ const Navbar: React.FC = () => {
             <FaGithub size={20} className="sm:size-6 text-purple-400 hover:text-white transition-colors duration-300" />
           </a>
           {/* Download Resume Icon */}
-          <a href="/ABR-CV25-11.pdf" download rel="noopener noreferrer" title="Download Resume" 
+          <a href="/ABR-CV25-12.pdf" download rel="noopener noreferrer" title="Download Resume" 
             onClick={e => {
                     e.preventDefault();
-                    window.open('/ABR-CV25-11.pdf', '_blank');
+                    window.open('/ABR-CV25-12.pdf', '_blank');
                     const link = document.createElement('a');
-                    link.href = '/ABR-CV25-11.pdf';
-                    link.download = 'ABR-CV25-11.pdf';
+                    link.href = '/ABR-CV25-12.pdf';
+                    link.download = 'Abeer-Kapoor-Resume.pdf';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
