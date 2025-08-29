@@ -2,7 +2,7 @@ import profilePic from "../assets/illustrations/profile-picture.png";
 import personalInfo from "../data/personal_info.json";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaXTwitter, FaDownload } from "react-icons/fa6";
-import pdfFile from 'src/assets/ABR-CV25-11.pdf';
+import pdfFile from '../assets/ABR-CV25-11.pdf';
 
 
 const Intro = () => {

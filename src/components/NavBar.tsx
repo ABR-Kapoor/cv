@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaDownload } from "react-icons/fa6";
-import pdfFile from 'src/assets/ABR-CV25-11.pdf';
+import pdfFile from '../assets/ABR-CV25-11.pdf';
 import personalInfo from '../data/personal_info.json';
 
 const navLinks = [
