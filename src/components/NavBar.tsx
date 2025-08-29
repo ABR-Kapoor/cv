@@ -53,7 +53,17 @@ const Navbar: React.FC = () => {
             <FaGithub size={22} className="text-purple-400 hover:text-white transition-colors duration-300" />
           </a>
           {/* Download Resume Icon */}
-          <a href="/ABR-CV25-11.pdf" download target="_blank" rel="noopener noreferrer" title="Download Resume">
+          <a href="/ABR-CV25-11.pdf" download rel="noopener noreferrer" title="Download Resume" 
+            onClick={e => {
+                    e.preventDefault();
+                    window.open('/ABR-CV25-11.pdf', '_blank');
+                    const link = document.createElement('a');
+                    link.href = '/ABR-CV25-11.pdf';
+                    link.download = 'ABR-CV25-11.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}>
             <FaDownload size={22} className="text-purple-400 hover:text-white transition-colors duration-300" />
           </a>
         </div>
