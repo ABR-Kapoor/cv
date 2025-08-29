@@ -33,7 +33,7 @@ const EducationCard = ({
 }) => {
   return (
     <motion.div
-      className="w-full h-[520px] [perspective:1000px] cursor-pointer"
+      className="w-full h-[340px] sm:h-[520px] [perspective:1000px] cursor-pointer"
       onClick={onFlip}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -52,59 +52,59 @@ const EducationCard = ({
       >
         {/* Front Face */}
         <div
-          className={`absolute w-full h-full rounded-2xl bg-gradient-to-r from-gray-900 to-blue-900 [backface-visibility:hidden] flex flex-col items-center justify-center gap-4 p-6 text-white`}
+          className={`absolute w-full h-full rounded-2xl bg-gradient-to-r from-gray-900 to-blue-900 [backface-visibility:hidden] flex flex-col items-center justify-center gap-2 sm:gap-4 p-4 sm:p-6 text-white`}
         >
           <img
             src={imgSrc}
             alt={`Logo of ${edu.college}`}
-            className="w-32 h-32 rounded-lg shadow-lg bg-white/10 object-cover"
+            className="w-20 h-20 sm:w-32 sm:h-32 rounded-lg shadow-lg bg-white/10 object-cover"
             loading="lazy"
           />
-          <h3 className="text-2xl font-extrabold text-center text-cyan-300 drop-shadow">
+          <h3 className="text-lg sm:text-2xl font-extrabold text-center text-cyan-300 drop-shadow">
             {edu.degree}
           </h3>
-          <p className="text-lg text-gray-200 text-center">{edu.college}</p>
-          <div className="flex items-center gap-2 text-md text-gray-300">
+          <p className="text-sm sm:text-lg text-gray-200 text-center">{edu.college}</p>
+          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-md text-gray-300">
             <FaCalendarAlt className="text-cyan-400" /> {edu.year}
           </div>
           {edu.cgpa && (
-            <div className="flex items-center gap-1 text-md text-yellow-300 font-semibold">
+            <div className="flex items-center gap-1 text-xs sm:text-md text-yellow-300 font-semibold">
               <FaStar /> GPA: {edu.cgpa}
             </div>
           )}
           {edu.status && (
-            <span className="text-sm text-blue-300 font-medium">
+            <span className="text-xs sm:text-sm text-blue-300 font-medium">
               {edu.status}
             </span>
           )}
-          <span className="text-xs text-gray-400 mt-4 animate-pulse">
+          <span className="text-xs text-gray-400 mt-2 sm:mt-4 animate-pulse">
             Click to see more →
           </span>
         </div>
 
         {/* Back Face */}
         <div
-          className={`absolute w-full h-full rounded-2xl bg-gradient-to-r from-blue-900 to-gray-900 [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col gap-4 p-8`}
+          className={`absolute w-full h-full rounded-2xl bg-gradient-to-r from-blue-900 to-gray-900 [transform:rotateY(180deg)] [backface-visibility:hidden] flex flex-col gap-2 sm:gap-4 p-4 sm:p-8`}
         >
           <div className="text-white">
-            <h4 className="flex items-center gap-2 font-bold text-cyan-300 mb-2 text-lg">
+            <h4 className="flex items-center gap-1 sm:gap-2 font-bold text-cyan-300 mb-1 sm:mb-2 text-base sm:text-lg">
               <FaMedal className="text-cyan-400" /> Achievements
             </h4>
-            <ul className="list-disc list-inside text-md text-gray-200 space-y-2">
+            <ul className="list-disc list-inside text-xs sm:text-md text-gray-200 space-y-1 sm:space-y-2">
               {edu.achievements.map((ach: string, i: number) => (
                 <li key={i}>{ach}</li>
               ))}
             </ul>
           </div>
           <div className="text-white">
-            <h4 className="flex items-center gap-2 font-bold text-green-300 mb-2 text-lg">
+            <h4 className="flex items-center gap-1 sm:gap-2 font-bold text-green-300 mb-1 sm:mb-2 text-base sm:text-lg">
               <FaBookOpen className="text-green-400" /> Subjects
             </h4>
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="flex flex-wrap gap-1 sm:gap-2 mt-1 sm:mt-2">
               {edu.subjects.map((subj: string, i: number) => (
                 <span
                   key={i}
-                  className="inline-block px-3 py-1 rounded-full bg-yellow-800 text-sm text-gray-200 hover:bg-cyan-600 transition-colors duration-300"
+                  className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-yellow-800 text-xs sm:text-sm text-gray-200 hover:bg-cyan-600 transition-colors duration-300"
                 >
                   {subj}
                 </span>
@@ -123,31 +123,30 @@ const Education = () => {
   return (
     <section
       id="education"
-      className="py-24 px-4 bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center"
+      className="py-12 sm:py-24 px-2 sm:px-4 bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center"
     >
-      <div className="text-center mb-16">
-        <h2 className="text-5xl font-extrabold text-cyan-400 drop-shadow-lg tracking-wide">
+      <div className="text-center mb-8 sm:mb-16">
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-cyan-400 drop-shadow-lg tracking-wide">
           <motion.div
-              className="text-6xl mb-4 cursor-pointer"
-              whileHover={{ scale: 1.2, rotate: [0, -10, 10, -10, 10, 0] }}
+            className="text-4xl sm:text-6xl mb-2 sm:mb-4 cursor-pointer"
+            whileHover={{ scale: 1.2, rotate: [0, -10, 10, -10, 10, 0] }}
           >
             🎓
           </motion.div>
-          <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 mb-4">
+          <h2 className="text-2xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 mb-2 sm:mb-4">
             My Academic Journey
           </h2>
-
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p className="text-gray-400 max-w-md sm:max-w-2xl mx-auto text-sm sm:text-base">
           Here's a look at my educational background, key achievements, and the subjects I've mastered along the way.
         </p>
       </div>
       {educationData.length === 0 ? (
-        <div className="text-center text-gray-400 text-lg">
+        <div className="text-center text-gray-400 text-base sm:text-lg">
           No education data available.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 w-full max-w-3xl sm:max-w-6xl">
           {educationData.map((edu: EducationType, idx: number) => {
             const imgSrc = collegeImages[edu.college] || college1;
             return (
@@ -169,3 +168,4 @@ const Education = () => {
 };
 
 export default Education;
+

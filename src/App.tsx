@@ -5,6 +5,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./Routes/AppRoutes";
 import personalInfo from "./data/personal_info.json";
+import FloatingNavCard from "./components/FloatingNavCard";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -48,6 +49,7 @@ const App = () => {
           <AppRoutes />
         </main>
         <Footer personalInfo={personalInfo} darkMode={darkMode} />
+        <FloatingNavCard />
         {showScrollTop && (
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
