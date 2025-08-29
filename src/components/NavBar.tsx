@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
             <FaGithub size={22} className="text-purple-400 hover:text-white transition-colors duration-300" />
           </a>
           {/* Download Resume Icon */}
-          <a href="/src/assets/ABR-CV25.11.pdf" download title="Download Resume">
+          <a href="/src/assets/ABR-CV25-11.pdf" download title="Download Resume">
             <FaDownload size={22} className="text-purple-400 hover:text-white transition-colors duration-300" />
           </a>
         </div>
