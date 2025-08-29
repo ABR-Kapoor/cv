@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaDownload } from "react-icons/fa6";
+import pdfFile from '../assets/ABR-CV25-11.pdf';
 import personalInfo from '../data/personal_info.json';
 
 const navLinks = [
@@ -52,7 +53,7 @@ const Navbar: React.FC = () => {
             <FaGithub size={22} className="text-purple-400 hover:text-white transition-colors duration-300" />
           </a>
           {/* Download Resume Icon */}
-          <a href="/src/assets/ABR-CV25-11.pdf" download title="Download Resume">
+          <a href={pdfFile} download target="_blank" rel="noopener noreferrer" title="Download Resume">
             <FaDownload size={22} className="text-purple-400 hover:text-white transition-colors duration-300" />
           </a>
         </div>

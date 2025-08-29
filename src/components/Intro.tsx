@@ -47,7 +47,7 @@ const Intro = () => {
         <div className="flex flex-wrap gap-4 justify-center mt-4 mb-8">
           {/* LinkedIn */}
           <a
-              href="https://www.linkedin.com/in/abeer-kapoor"
+              href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-cyan-400 border border-cyan-700 shadow hover:bg-cyan-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-200 font-medium"
@@ -58,7 +58,7 @@ const Intro = () => {
           </a>
 
           {/* GitHub */}
-          <a href="https://github.com/your-github"
+          <a href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-gray-200 border border-gray-700 shadow-md hover:shadow-purple-500/60 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200 font-medium hover:drop-shadow-[0_0_12px_rgba(180,120,255,0.7)]"
@@ -70,7 +70,7 @@ const Intro = () => {
 
           {/* X (Twitter) */}
           <a
-              href="https://x.com/your-x"
+              href="https://x.com/AbeerKapoor1/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-blue-400 border border-blue-700 shadow-md hover:shadow-blue-500/60 hover:bg-blue-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200 font-medium hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.7)]"
