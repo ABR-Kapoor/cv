@@ -2,7 +2,7 @@ import profilePic from "../assets/illustrations/profile-picture.png";
 import personalInfo from "../data/personal_info.json";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaXTwitter, FaDownload } from "react-icons/fa6";
-import pdfFile from '../assets/ABR-CV25-11.pdf';
+// import pdfFile from '../assets/ABR-CV25-11.pdf'; // Unused import removed
 
 
 const Intro = () => {
@@ -83,9 +83,11 @@ const Intro = () => {
           </a>
 
           {/* Download CV */}
-          <a
-              href={pdfFile}
+      <a
+        href="/ABR-CV25-11.pdf"
               download
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-purple-400 border border-purple-700 shadow-md hover:shadow-purple-500/60 hover:bg-purple-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-200 font-medium hover:drop-shadow-[0_0_12px_rgba(168,85,247,0.7)]"
               aria-label="Download CV"
           >
