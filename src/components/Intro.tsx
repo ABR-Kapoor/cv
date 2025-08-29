@@ -7,6 +7,8 @@ import { useState } from "react";
 
 const Intro = () => {
   const [colorMode, setColorMode] = useState(false);
+  // Detect mobile device
+  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches;
   return (
     <section className="pt-16 sm:pt-24 md:pt-36 pb-10 sm:pb-16 px-2 sm:px-4 bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#312e81] text-white min-h-screen flex items-center justify-center">
       <div className="w-full h-full flex flex-col items-center gap-4 sm:gap-9">
@@ -20,7 +22,18 @@ const Intro = () => {
           {personalInfo.name}
         </motion.h1>
         {/* Profile Image with effect */}
-        <div className="relative group cursor-pointer" onClick={() => setColorMode((prev) => !prev)}>
+        <div
+          className="relative group cursor-pointer"
+          onClick={() => {
+            if (isMobile) setColorMode((prev) => !prev);
+          }}
+          onMouseEnter={() => {
+            if (!isMobile) setColorMode(true);
+          }}
+          onMouseLeave={() => {
+            if (!isMobile) setColorMode(false);
+          }}
+        >
           <div className={`absolute inset-0 rounded-full blur-2xl opacity-70 bg-white animate-pulse z-0 transition-all duration-500 ${colorMode ? "bg-gradient-to-tr from-pink-400 via-blue-400 to-red-500 opacity-90 animate-none" : ""}`}></div>
           <img
             src={profilePic}

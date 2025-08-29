@@ -26,12 +26,21 @@ const FloatingNavCard: React.FC = () => {
         </a>
         {/* Download CV Icon */}
         <a
-          href="/ABR-CV25-11.pdf"
-          download
+          href="/ABR-CV25-12.pdf"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Download CV"
           className="flex flex-col items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          onClick={e => {
+            e.preventDefault();
+            window.open("/ABR-CV25-12.pdf", "_blank");
+            const link = document.createElement("a");
+            link.href = "/ABR-CV25-12.pdf";
+            link.download = "Abeer-Kapoor-Resume.pdf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }}
         >
           <FiDownload
             className="w-7 h-7 text-blue-500 group-hover:scale-110 group-active:scale-95 transition-transform duration-150 drop-shadow"
