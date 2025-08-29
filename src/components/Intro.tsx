@@ -52,7 +52,7 @@ const Intro = () => {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-cyan-400 border border-cyan-700 shadow hover:bg-cyan-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-200 font-medium"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-blue-400 border border-blue-700 shadow-md hover:bg-blue-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-700 transition-all duration-200 font-medium hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.7)]"
               aria-label="LinkedIn"
           >
             <FaLinkedin className="w-5 h-5" />
