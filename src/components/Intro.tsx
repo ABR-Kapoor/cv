@@ -3,7 +3,10 @@ import personalInfo from "../data/personal_info.json";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaXTwitter, FaDownload } from "react-icons/fa6";
 
+import { useState } from "react";
+
 const Intro = () => {
+  const [colorMode, setColorMode] = useState(false);
   return (
     <section className="pt-16 sm:pt-24 md:pt-36 pb-10 sm:pb-16 px-2 sm:px-4 bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#312e81] text-white min-h-screen flex items-center justify-center">
       <div className="w-full h-full flex flex-col items-center gap-4 sm:gap-9">
@@ -17,12 +20,12 @@ const Intro = () => {
           {personalInfo.name}
         </motion.h1>
         {/* Profile Image with effect */}
-        <div className="relative group">
-          <div className="absolute inset-0 rounded-full blur-2xl opacity-70 bg-white animate-pulse z-0 group-hover:bg-gradient-to-tr group-hover:from-pink-400 group-hover:via-blue-400 group-hover:to-red-500 group-hover:opacity-90 group-hover:animate-none transition-all duration-500"></div>
+        <div className="relative group cursor-pointer" onClick={() => setColorMode((prev) => !prev)}>
+          <div className={`absolute inset-0 rounded-full blur-2xl opacity-70 bg-white animate-pulse z-0 transition-all duration-500 ${colorMode ? "bg-gradient-to-tr from-pink-400 via-blue-400 to-red-500 opacity-90 animate-none" : ""}`}></div>
           <img
             src={profilePic}
             alt="Profile"
-            className="w-24 h-24 sm:w-44 sm:h-44 md:w-60 md:h-60 rounded-full object-cover border-4 border-cyan-400 shadow-2xl grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 relative z-10"
+            className={`w-24 h-24 sm:w-44 sm:h-44 md:w-60 md:h-60 rounded-full object-cover border-4 border-cyan-400 shadow-2xl transition-all duration-500 relative z-10 ${colorMode ? "grayscale-0 scale-110" : "grayscale"}`}
           />
         </div>
         {/* Headline */}
