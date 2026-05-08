@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Star, Trophy, ChevronDown } from "lucide-react";
+import { Calendar, Star, ChevronDown } from "lucide-react";
 import { unifiedData } from "../data/unifiedData";
 
 const WorkCard = ({ experience, index }: {

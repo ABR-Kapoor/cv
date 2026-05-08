@@ -50,14 +50,10 @@ const HackCard = ({ event, accent, img, index, onExpand }: {
     >
       <motion.div
         ref={cardRef}
-        style={{ rotateX: hovered ? rotateX : 0, rotateY: hovered ? rotateY : 0, transformStyle: "preserve-3d" }}
-        onMouseMove={onMove}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={onLeave}
-        className="relative w-full rounded-2xl overflow-hidden"
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
         style={{
+          rotateX: hovered ? rotateX : 0,
+          rotateY: hovered ? rotateY : 0,
+          transformStyle: "preserve-3d",
           background: "var(--bg-card-strong)",
           backdropFilter: "blur(22px)",
           border: "1px solid var(--border-card)",
@@ -66,6 +62,12 @@ const HackCard = ({ event, accent, img, index, onExpand }: {
             : `0 8px 32px ${accent.glow}, var(--shadow-md)`,
           transition: "box-shadow 0.3s ease",
         }}
+        onMouseMove={onMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={onLeave}
+        className="relative w-full rounded-2xl overflow-hidden"
+        whileHover={{ scale: 1.02 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
       >
         {/* Shimmer */}
         {hovered && (

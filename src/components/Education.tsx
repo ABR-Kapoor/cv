@@ -29,7 +29,6 @@ const EduCard = ({ edu, img, accent, index }: {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), { stiffness: 180, damping: 22 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-9, 9]), { stiffness: 180, damping: 22 });
   const shimmerX = useTransform(mouseX, [-0.5, 0.5], ["10%", "90%"]);
   const shimmerY = useTransform(mouseY, [-0.5, 0.5], ["10%", "90%"]);
 

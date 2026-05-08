@@ -11,7 +11,7 @@ import FunEvents from "../components/FunEvents";
 
 // 3D scroll section wrapper — gives each section a subtle parallax tilt on scroll
 const ScrollSection = ({ children, id, delay = 0 }: {
-  children: React.ReactNode; id: string; delay?: number;
+  children: React.ReactNode; id: string;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
