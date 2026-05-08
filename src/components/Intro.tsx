@@ -104,7 +104,7 @@ const Intro = () => (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
         {/* LEFT — text content */}
-        <div className="flex flex-col gap-5 sm:gap-6 text-center lg:text-left items-center lg:items-start order-2 lg:order-1">
+        <div className="flex flex-col gap-5 sm:gap-6 text-center lg:text-left items-center lg:items-start order-1 lg:order-1">
           {/* Mono label */}
           <motion.div
             className="text-label"
@@ -213,7 +213,7 @@ const Intro = () => (
 
         {/* RIGHT — photo */}
         <motion.div
-          className="flex justify-center lg:justify-end order-1 lg:order-2 mb-2 lg:mb-0"
+          className="flex justify-center lg:justify-end order-2 lg:order-2 mb-2 lg:mb-0"
           initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >

@@ -1,35 +1,44 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-
-  const { name, email, message } = req.body ?? {};
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'All fields are required' });
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: 'Invalid email address' });
-  }
-
-  if (String(message).length > 2000) {
-    return res.status(400).json({ error: 'Message too long (max 2000 chars)' });
-  }
-
-  // Send directly to Telegram (no DB, no email)
   try {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') return res.status(200).end();
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+    const { name, email, message } = req.body ?? {};
+    const cleanName = String(name ?? '').trim();
+    const cleanEmail = String(email ?? '').trim();
+    const cleanMessage = String(message ?? '').trim();
+
+    if (!cleanName || !cleanEmail || !cleanMessage) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(cleanEmail)) {
+      return res.status(400).json({ error: 'Invalid email address' });
+    }
+
+    if (cleanMessage.length > 2000) {
+      return res.status(400).json({ error: 'Message too long (max 2000 chars)' });
+    }
+
+    if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) {
+      return res.status(500).json({ error: 'Telegram env is not configured' });
+    }
+
     const tgText =
-      `🔔 <b>New Portfolio Contact!</b>\n\n` +
-      `👤 <b>Name:</b> ${name}\n` +
-      `📧 <b>Email:</b> ${email}\n` +
-      `💬 <b>Message:</b>\n${String(message).slice(0, 400)}${String(message).length > 400 ? '...' : ''}`;
+      `New Portfolio Contact\n\n` +
+      `Name: ${cleanName}\n` +
+      `Email: ${cleanEmail}\n` +
+      `Message:\n${cleanMessage.slice(0, 1200)}${cleanMessage.length > 1200 ? '...' : ''}`;
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
 
     const tgRes = await fetch(
       `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
@@ -39,19 +48,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         body: JSON.stringify({
           chat_id: process.env.TELEGRAM_CHAT_ID,
           text: tgText,
-          parse_mode: 'HTML',
         }),
+        signal: controller.signal,
       }
     );
+    clearTimeout(timeout);
 
-    if (!tgRes.ok) {
-      throw new Error(`Telegram API error: ${tgRes.status}`);
+    const raw = await tgRes.text();
+    let tgData: { ok?: boolean; description?: string } | null = null;
+    try {
+      tgData = JSON.parse(raw);
+    } catch {
+      tgData = null;
     }
 
-    return res.status(200).json({
-      success: true,
-      message: 'Message delivered to Telegram!',
-    });
+    if (!tgRes.ok || tgData?.ok === false) {
+      const detail = tgData?.description || raw || `HTTP ${tgRes.status}`;
+      console.error('Telegram send error:', detail);
+      return res.status(502).json({ error: 'Telegram delivery failed', detail });
+    }
+
+    return res.status(200).json({ success: true, message: 'Message delivered to Telegram!' });
   } catch (err) {
     console.error('Telegram error:', err);
     return res.status(500).json({ error: 'Failed to send message' });
