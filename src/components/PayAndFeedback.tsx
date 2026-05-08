@@ -111,13 +111,21 @@ const PayAndFeedback = ({ isOpen, setIsOpen, service }: PayAndFeedbackProps) => 
                 </div>
             )}
 
-            {/* Payment Button */}
-            <button
-                className="w-full py-3 rounded-full font-semibold text-sm tracking-wide bg-gradient-to-r from-cyan-600 via-blue-700 to-purple-700 text-white shadow-lg hover:scale-105 active:scale-95 transition-all duration-200"
-                onClick={() => alert("Proceeding to payment...")}
+            {/* WhatsApp Booking */}
+            <a
+              href={`https://wa.me/919770075755?text=Hi%20Abeer!%20I%20want%20to%20proceed%20with%20the%20${encodeURIComponent(title)}%20service.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm tracking-wide bg-green-600 hover:bg-green-500 text-white shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 mb-2"
             >
-              Proceed to Pay
-            </button>
+              Book via WhatsApp
+            </a>
+            <a
+              href="tel:+919770075755"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full font-semibold text-sm bg-gray-700 hover:bg-gray-600 text-gray-200 transition-all duration-200"
+            >
+              Call: +91 97700 75755
+            </a>
           </motion.div>
         </motion.div>
       )}

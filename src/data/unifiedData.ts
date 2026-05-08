@@ -1,15 +1,15 @@
-// Data aggregator to combine all JSON data sources
+// Data aggregator — static data only.
+// Dynamic data (projects, achievements, services, certifications, memberships)
+// is now fetched from InsForge via src/hooks/useInsForge.ts
 import personalInfo from './personal_info.json';
 import education from './education.json';
 import experience from './experience.json';
-import projects from './projects.json';
 import technicalSkills from './technical_skills.json';
-import achievements from './achievements.json';
 
-// Skill level mapping helper - Based on your real expertise
+// Skill level mapping helper - Based on real expertise from CV
 const getSkillLevel = (skill: string): number => {
   const levelMap: { [key: string]: number } = {
-    // Programming Languages - Your strongest skills
+    // Programming Languages
     'Java': 88,
     'Python': 90,
     'JavaScript': 85,
@@ -17,34 +17,58 @@ const getSkillLevel = (skill: string): number => {
     'SQL (PostgreSQL, MySQL)': 85,
     'HTML': 95,
     'CSS': 90,
+    'Solidity': 45,
 
-    // Frameworks - Based on your projects
+    // Frameworks & Libraries
     'React.js': 88,
     'Next.js': 85,
     'Node.js': 82,
     'Express.js': 80,
+    'FastAPI': 78,
     'Spring Boot': 78,
     'Tailwind CSS': 90,
-
-    // Data Science & ML
+    'Framer Motion': 78,
     'Scikit-learn': 75,
     'Pandas': 80,
     'NumPy': 78,
     'Matplotlib': 75,
+    'Axios': 82,
     'NLP': 72,
-    'RAG': 70,
-    'Fine tuning': 68,
+    'RAG': 72,
+    'Fine-tuning': 68,
+
+    // AI & Agentic Systems
+    'Gemini Pro': 88,
+    'Groq (LLaMA 3)': 80,
+    'Local LLM Integration': 78,
+    'Prompt Engineering': 90,
+    'Agentic AI Pipelines': 75,
+    'Autonomous Agents': 73,
+    'Langraph': 70,
+    'Function Calling': 78,
+    'MCP': 72,
+    'A2A': 70,
+    'Judge0 API': 75,
+
+    // Blockchain & Web3
+    'IPFS via Pinata': 65,
+    'Smart Contracts': 50,
+    'Ethereum (fundamentals)': 45,
 
     // Cloud & DevOps
     'AWS (EC2, S3)': 70,
     'Docker': 68,
     'Firebase': 85,
+    'Vercel': 88,
     'Git/GitHub': 90,
+    'ZOHO Site24x7': 65,
+    'CI/CD basics': 65,
 
     // Databases
+    'PostgreSQL (Neon, Supabase)': 85,
     'MongoDB': 78,
-    'PostgreSQL': 82,
     'Firebase Firestore': 85,
+    'MySQL': 80,
 
     // Developer Tools
     'Git': 90,
@@ -55,21 +79,27 @@ const getSkillLevel = (skill: string): number => {
     'ChatGPT': 92,
     'Gemini pro': 88,
     'Copilot': 90,
+    'Cursor': 85,
 
-    // Soft Skills - Based on your achievements
+    // Soft Skills
     'Leadership': 90,
     'Self-Learner': 95,
     'Good at Negotiations': 85,
     'Managerial skills': 82,
-    'Great prompt engineer': 88,
+    'Great prompt engineer': 90,
     'Questioning skill': 90,
-    'Observation': 87
+    'Observation': 87,
+    'Team Management': 85,
+    'Agile Sprints': 80,
+    'Product Thinking': 83,
+    'Public Speaking': 78,
+    'UX Thinking': 80,
   };
 
-  return levelMap[skill] || 75; // Default level for unlisted skills
+  return levelMap[skill] || 70;
 };
 
-// Enhanced emoji mapping
+// Emoji mapping
 const getSkillEmoji = (skill: string): string => {
   const emojiMap: { [key: string]: string } = {
     'Java': '☕',
@@ -79,129 +109,151 @@ const getSkillEmoji = (skill: string): string => {
     'SQL (PostgreSQL, MySQL)': '🗄️',
     'HTML': '🌐',
     'CSS': '🎨',
+    'Solidity': '🔗',
     'React.js': '⚛️',
     'Next.js': '▲',
     'Node.js': '🟢',
-    'Express.js': '🚀',
+    'Express.js': '🚂',
+    'FastAPI': '⚡',
     'Spring Boot': '🌱',
     'Tailwind CSS': '💨',
+    'Framer Motion': '🎞️',
     'Scikit-learn': '🤖',
     'Pandas': '🐼',
     'NumPy': '🔢',
     'Matplotlib': '📊',
+    'Axios': '🔄',
     'NLP': '🗣️',
     'RAG': '🔍',
+    'Fine-tuning': '🎛️',
+    'Gemini Pro': '💎',
+    'Groq (LLaMA 3)': '🦙',
+    'Local LLM Integration': '🧠',
+    'Prompt Engineering': '🎯',
+    'Agentic AI Pipelines': '🤖',
+    'Autonomous Agents': '🦾',
+    'Langraph': '🕸️',
+    'Function Calling': '📞',
+    'MCP': '🔌',
+    'A2A': '🔀',
+    'Judge0 API': '⚖️',
+    'IPFS via Pinata': '📌',
+    'Smart Contracts': '📜',
+    'Ethereum (fundamentals)': '🔷',
     'MongoDB': '🍃',
-    'PostgreSQL': '🐘',
+    'PostgreSQL (Neon, Supabase)': '🐘',
     'Firebase Firestore': '🔥',
+    'MySQL': '🐬',
     'AWS (EC2, S3)': '☁️',
     'Docker': '🐳',
     'Firebase': '🔥',
+    'Vercel': '▲',
     'Git/GitHub': '🐙',
+    'ZOHO Site24x7': '📡',
+    'CI/CD basics': '🔄',
     'Git': '📝',
     'VS Code': '💻',
-    'PyCharm': '🐍',
     'Figma': '🎨',
     'Postman': '📮',
     'ChatGPT': '🤖',
-    'Gemini pro': '💎',
     'Copilot': '✈️',
+    'Cursor': '🖱️',
     'Leadership': '👑',
     'Self-Learner': '📚',
     'Good at Negotiations': '🤝',
     'Managerial skills': '👨‍💼',
     'Great prompt engineer': '🎯',
     'Questioning skill': '❓',
-    'Observation': '👁️'
+    'Observation': '👁️',
+    'Team Management': '👥',
+    'Agile Sprints': '🏃',
+    'Product Thinking': '💡',
+    'Public Speaking': '🎤',
+    'UX Thinking': '🎨',
   };
 
   return emojiMap[skill] || '🔧';
 };
 
-// Unified data structure using ALL your real JSON data
+// Unified data structure
 export const unifiedData = {
-  // Personal Information from personal_info.json
+  // Personal Information
   personal: {
     name: personalInfo.name,
     email: personalInfo.email,
     phone: personalInfo.phone,
-    title: "Full Stack Developer & AI Enthusiast",
-    tagline: "MCA Student • Hackathon Winner • Innovation Leader",
-    location: "India",
+    title: "Full-Stack & AI Engineer | Hackathon Winner",
+    tagline: "MCA Student • ₹22K Hackathon Winner • Shipped 13+ Live Products",
+    location: "Bhilai, Chhattisgarh, India",
+    website: (personalInfo as any).website || "https://cv.kapoorabeer.me",
     socialLinks: {
       github: personalInfo.github,
       linkedin: personalInfo.linkedin,
       whatsapp: personalInfo.whatsapp,
+      twitter: (personalInfo as any).twitter || "https://x.com/AbeerKapoor1/",
     },
     funFacts: [
-      "Hackathon Winner at IIT Bhilai 🏆",
-      "Rank #1 in BCA final 🥇",
-      "AI & Prompt Engineering Expert 🤖",
-      "Built 4+ Real-world Projects 🚀",
-      "Great at turning ideas into reality ✨"
+      "₹22K Hackathon Winner (IIT Bhilai + SSTC) 🏆",
+      "Rank #1 in BCA Final 🥇",
+      "Shipped 13+ real-world live products 🚀",
+      "5+ AI projects including Agentic AI systems 🤖",
+      "INAE Member — Indian National Academy of Engineering ✨",
+      "Top 11 in HackIndia 2025 (85+ teams) 🔥"
     ]
   },
 
-  // Education from education.json
+  // Education
   education: {
-    degrees: education.map((edu, index) => ({
+    degrees: education.map((edu: any, index: number) => ({
       title: edu.degree,
       institution: edu.college,
       duration: edu.year,
       location: edu.college.includes('Durg') ? 'Durg, Chhattisgarh' : 'Bhilai, Chhattisgarh',
-      gpa: edu.cgpa || (edu.status === 'Ongoing' ? 'In Progress' : 'N/A'),
+      gpa: edu.cgpa || 'In Progress',
       status: edu.status,
-      achievements: index === 0 ? [
-        "CGPA: 8.2/10 - Excellent Performance",
-        "Rank #1 in BCA final",
-        "Active participation in technical events and projects"
-      ] : [
-        "Currently pursuing Master's in Computer Applications",
-        "Specializing in advanced AI and software development",
-        "Expected graduation: 2026"
-      ],
-      subjects: index === 0 ? ["Programming", "Database Systems", "Web Development", "DSA", "Software Engineering"] : ["Advanced AI/ML", "Data Science", "Cloud Computing", "Research Methodology", "Software Architecture"],
+      achievements: edu.achievements,
+      subjects: edu.subjects,
       performance: index === 0 ? [82, 85, 88, 80, 84] : [90, 88, 85, 87, 89]
     }))
   },
 
-  // Skills from technical_skills.json - Using ALL categories
+  // Skills
   skills: {
     technical: [
-      // Programming Languages
       ...technicalSkills.languages.map((skill: string) => ({
         name: skill,
         level: getSkillLevel(skill),
         emoji: getSkillEmoji(skill),
         category: 'Programming Languages',
-        description: `Proficient in ${skill} with hands-on project experience`
+        description: `Proficient in ${skill} with hands-on project experience across real-world shipped products`
       })),
-
-      // Top Frameworks & Libraries
-      ...technicalSkills.frameworks_libraries.slice(0, 6).map((skill: string) => ({
+      ...technicalSkills.frameworks_libraries.slice(0, 8).map((skill: string) => ({
         name: skill,
         level: getSkillLevel(skill),
         emoji: getSkillEmoji(skill),
         category: 'Frameworks & Libraries',
-        description: `Experienced in building applications with ${skill}`
+        description: `Built production apps using ${skill}`
       })),
-
-      // Cloud & DevOps
+      ...(technicalSkills as any).ai_agentic.slice(0, 5).map((skill: string) => ({
+        name: skill,
+        level: getSkillLevel(skill),
+        emoji: getSkillEmoji(skill),
+        category: 'AI & Agentic Systems',
+        description: `Working expertise in ${skill} — used in real agentic AI pipelines and live products`
+      })),
       ...technicalSkills.cloud_devops.map((skill: string) => ({
         name: skill,
         level: getSkillLevel(skill),
         emoji: getSkillEmoji(skill),
         category: 'Cloud & DevOps',
-        description: `Experience with ${skill} for deployment and development`
+        description: `Deployed and maintained production apps using ${skill}`
       })),
-
-      // Databases
       ...technicalSkills.databases.map((skill: string) => ({
         name: skill,
         level: getSkillLevel(skill),
         emoji: getSkillEmoji(skill),
         category: 'Databases',
-        description: `Database management and optimization with ${skill}`
+        description: `Production database management and optimization with ${skill}`
       }))
     ],
 
@@ -210,106 +262,48 @@ export const unifiedData = {
       level: getSkillLevel(skill),
       emoji: getSkillEmoji(skill),
       category: 'Soft Skills',
-      description: `Strong ${skill.toLowerCase()} abilities demonstrated through various projects and achievements`
+      description: `Demonstrated ${skill.toLowerCase()} across hackathons, team projects, and client engagements`
     }))
   },
 
-  // Experience from experience.json
-  experience: experience.map((exp) => ({
+  // Experience — pulled from updated experience.json
+  experience: experience.map((exp: any) => ({
     role: exp.role,
     company: exp.company,
     duration: exp.duration,
-    description: `Gained valuable industry experience at ${exp.company} working on enterprise-level Java applications and learning professional development practices.`,
-    highlights: [
-      "Developed Java-based backend modules using Spring Boot 🚀",
-      "Learned industry best practices and coding standards ✅",
-      "Collaborated with experienced development teams 🤝",
-      "Contributed to multiple project modules and features 💪"
-    ],
-    techStack: ["Java", "Spring Boot", "Git", "Agile Methodology", "Team Collaboration"],
-    funAchievement: "Successfully completed 4-month internship with excellent feedback! 🌟"
+    description: exp.description,
+    highlights: exp.highlights,
+    techStack: exp.techStack,
+    funAchievement: exp.company === 'Botivate LLC'
+      ? 'Led 2 developers & served as Techno expert with client — across 5 live products! 🚀'
+      : 'Delivered ~20% backend performance improvement with 5+ UI components! 🌟'
   })),
 
-  // Projects from projects.json - All your real projects
-  projects: projects.map((project, index) => ({
-    title: project.title,
-    description: project.details,
-    techStack: index === 0 ? ["React Native", "AI/ML", "Gamification", "Mobile Development"] :
-                index === 1 ? ["React.js", "Node.js", "AI Integration", "Business Intelligence"] :
-                index === 2 ? ["Python", "Telegram API", "Asyncio", "Real-time Communication"] :
-                ["React.js", "Firebase", "Material UI", "Social Media Platform"],
-    features: project.details.split('.').slice(0, 3).map(feature => feature.trim()),
-    demoLink: project.title.includes('Slobby') ? "#" : undefined,
-    githubLink: "#",
-    emoji: index === 0 ? "🌱" : index === 1 ? "🤖" : index === 2 ? "💬" : "📷",
-    status: project.date,
-    category: index === 0 ? "Mobile App - Hackathon Winner" :
-              index === 1 ? "AI Platform" :
-              index === 2 ? "Bot Development" :
-              "Social Media Platform",
-    highlights: project.title.includes('Hackathon') ? ["🏆 Won ₹10,000 at IIT Bhilai", "AI-Powered Solution", "Social Impact Focus"] :
-                project.title.includes('Slobby') ? ["50+ Active Users", "AI-Generated Roadmaps", "Full-Stack Solution"] :
-                project.title.includes('bot') ? ["Real-time Anonymous Chat", "Secure Communication", "Python & Asyncio"] :
-                ["Real-time Social Features", "Material UI Design", "Firebase Integration"]
-  })),
-
-  // Awards from achievements.json - Your real achievements
-  awards: achievements.map((achievement) => {
-    if (achievement.includes('Hackathon')) {
-      return {
-        title: '🏆 Hackathon Winner - IIT Bhilai',
-        description: 'Awarded ₹10,000 for LalaAm mobile app - gamified solution to reduce screen addiction in kids',
-        year: '2024',
-        organization: 'IIT Bhilai'
-      };
-    } else if (achievement.includes('Rank #1 in BCA')) {
-      return {
-        title: '🥇 Academic Excellence - BCA',
-        description: 'Achieved Rank #1 in BCA final examinations with outstanding academic performance',
-        year: '2024',
-        organization: 'Govt. V.Y.T. College, Durg'
-      };
-    } else if (achievement.includes('10th class')) {
-      return {
-        title: '⭐ Academic Achievement - Class 10',
-        description: 'Rank #1 in 10th class, awarded and recognized by Dainik Bhaskar newspaper',
-        year: '2019',
-        organization: 'Dainik Bhaskar'
-      };
-    } else if (achievement.includes('INAE')) {
-      return {
-        title: '🎖️ National Recognition - INAE',
-        description: 'Honored by Indian National Academy of Engineering (INAE), New Delhi for outstanding contributions',
-        year: '2024',
-        organization: 'Indian National Academy of Engineering'
-      };
-    } else {
-      return {
-        title: '🏅 Outstanding Achievement',
-        description: achievement,
-        year: '2023-2024',
-        organization: 'Various Organizations'
-      };
-    }
-  }),
-
-  // Enhanced Fun Events - Based on your real hackathon wins
+  // Hackathon Events — complete from CV
   funEvents: [
     {
-      title: "LalaAm - Hackathon Winner 🏆",
-      description: "Led the prototype of a gamified mobile app to reduce screen addiction in kids (ages 4-12). Awarded ₹10,000 prize money at IIT Bhilai.",
-      highlights: ["₹10,000 Prize Money", "AI-Powered Gamification", "Social Impact Focus", "Team Leadership", "IIT Bhilai Recognition"],
+      title: "AuraSutra — Healthcare AI-EcoSystem 🏆",
+      description: "SSTC National Level Winner (₹12,000). Full-stack app guiding 50+ rural & urban users through AI-generated health action plans. Local LLM integration, sub-300ms API latency, 99.9% uptime.",
+      highlights: ["₹12,000 Prize Money", "SSTC National Level", "Local LLM Integration", "50+ Users Deployed", "99.9% Uptime"],
+      location: "SSTC",
+      date: "November 2025",
+      emoji: "🏥"
+    },
+    {
+      title: "LalaAm — Screen Addiction Reversal App 🏆",
+      description: "IIT Bhilai National Level Winner (₹10,000). Gamified mobile app reducing screen time in kids aged 4–12. Analyzed 50+ psychology studies, validated with 30+ parents. 40% screen time reduction.",
+      highlights: ["₹10,000 Prize Money", "IIT Bhilai National", "React Native", "40% Screen Time Reduction", "30+ Parent Validated"],
       location: "IIT Bhilai",
       date: "December 2024",
       emoji: "🏆"
     },
     {
-      title: "National Hackathon Champion 🚀",
-      description: "Contributed to solution design & development in 3+ national-level hackathons with innovative tech solutions.",
-      highlights: ["Multiple National Participations", "Innovative AI Solutions", "Team Collaboration", "Technical Excellence", "Problem-Solving Focus"],
-      location: "Various National Venues",
-      date: "2023-2024",
-      emoji: "🚀"
+      title: "HackIndia 2025 — National Finalist",
+      description: "Competed at HackIndia 2025 against 85+ teams from across India. Built and shipped a working AI-powered prototype end-to-end within the hackathon window — made it to the finalist round through strategic prototyping and strong technical execution.",
+      highlights: ["85+ Competing Teams", "AI-Powered Prototype", "End-to-End Delivery", "National Finalist Round", "Strategic Execution"],
+      location: "HackIndia",
+      date: "2025",
+      emoji: "🌟"
     }
   ]
 };

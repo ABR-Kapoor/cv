@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
-import { unifiedData } from "../data/unifiedData";
 import OptimizedImage from "./OptimizedImage";
+import { useInsForge } from "../hooks/useInsForge";
+import { fetchProjects, type Project } from "../lib/api";
+import LoadingState from "./ui/LoadingState";
+import ErrorState from "./ui/ErrorState";
 
 import project1Img from "../assets/illustrations/project1.jpg";
 import project2Img from "../assets/illustrations/project2.jpg";
@@ -14,14 +17,17 @@ const projectImages = [project1Img, project2Img, project3Img, project4Img];
 
 const Projects = () => {
     const [selectedProject, setSelectedProject] = useState<number | null>(null);
+    const { data: projects, loading, error } = useInsForge<Project[]>(fetchProjects, []);
+    const projectList = Array.isArray(projects) ? projects : [];
+
+    if (loading) return <LoadingState message="Loading projects..." />;
+    if (error) return <ErrorState message={error} />;
 
     return (
-        <section className="py-12 sm:py-20 bg-gray-900 relative overflow-hidden">
+        <section className="section-light py-16 sm:py-28 relative overflow-hidden">
             {/* Background Effects */}
-            <div className="absolute inset-0">
-                <div className="absolute top-1/4 left-1/4 w-40 h-40 sm:w-96 sm:h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-96 sm:h-96 bg-purple-500/10 rounded-full blur-3xl" />
-            </div>
+            <div className="orb orb-cyan w-96 h-96 top-0 -right-20 opacity-15" />
+            <div className="orb orb-indigo w-72 h-72 bottom-0 -left-16 opacity-15" />
 
             <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 relative">
                 {/* Section Header */}
@@ -37,7 +43,10 @@ const Projects = () => {
                     >
                         🚀
                     </motion.div>
-                    <h2 className="text-3xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-2 sm:mb-4 animate-gradient">
+                <h2 className="text-3xl sm:text-5xl font-extrabold mb-3" style={{
+                        background: "linear-gradient(135deg, #4f46e5, #7c3aed, #06b6d4)",
+                        WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text"
+                    }}>
                         Featured Projects
                     </h2>
                     <p className="text-gray-400 max-w-md sm:max-w-2xl mx-auto text-base sm:text-lg">
@@ -47,32 +56,38 @@ const Projects = () => {
 
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 mb-8 sm:mb-16">
-                    {unifiedData.projects.map((project, index) => (
-                        <motion.div
+                    {projectList.length === 0 ? (
+                        <div className="col-span-full text-center text-gray-400 text-sm sm:text-base">
+                            No projects found.
+                        </div>
+                    ) : (
+                        projectList.map((project, index) => (
+                    <motion.div
                             key={index}
-                            className="rounded-lg sm:rounded-xl shadow-lg overflow-hidden bg-gray-800 text-gray-300 border border-gray-700 cursor-pointer"
-                            whileHover={{ scale: 1.02 }}
+                            className="rounded-2xl overflow-hidden cursor-pointer glass-card glass-card-hover"
+                            whileHover={{ scale: 1.02, y: -4 }}
                             onClick={() => setSelectedProject(index)}
                         >
                             <OptimizedImage src={projectImages[index % projectImages.length]} alt={project.title} className="w-full h-32 sm:h-56 object-cover" />
                             <div className="p-4 sm:p-6">
-                                <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2 text-cyan-300">{project.title}</h3>
-                                <p className="mb-2 sm:mb-4 text-gray-300 text-sm sm:text-base">{project.description}</p>
+                                <h3 className="text-base sm:text-xl font-bold mb-1 sm:mb-2 text-indigo-800">{project.title}</h3>
+                                <p className="mb-2 sm:mb-4 text-gray-600 text-sm sm:text-base line-clamp-2">{project.details}</p>
                                 <div className="flex items-center space-x-2 sm:space-x-4 mt-2 sm:mt-4">
-                                    {project.githubLink && (
-                                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                    {project.github_link && (
+                                        <a href={project.github_link} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                                             <FiGithub size={18} className="text-purple-400 w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10" />
                                         </a>
                                     )}
-                                    {project.demoLink && (
-                                        <a href={project.demoLink} target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
+                                    {project.demo_link && (
+                                        <a href={project.demo_link} target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
                                             <FiExternalLink size={18} className="text-cyan-400 w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10" />
                                         </a>
                                     )}
                                 </div>
                             </div>
                         </motion.div>
-                    ))}
+                        ))
+                        )}
 
                     {/* Expanded Project Details Modal */}
                     <AnimatePresence>
@@ -102,25 +117,25 @@ const Projects = () => {
                                             <div className="w-full h-40 sm:h-80 rounded-xl sm:rounded-2xl overflow-hidden mb-4 sm:mb-6 shadow-xl bg-gradient-to-br from-cyan-900 via-blue-900 to-purple-900">
                                                 <OptimizedImage
                                                     src={projectImages[selectedProject % projectImages.length]}
-                                                    alt={unifiedData.projects[selectedProject].title}
+                                                    alt={projectList[selectedProject].title}
                                                     className="object-cover w-full h-full scale-110"
                                                 />
                                             </div>
                                             <h2 className="text-xl sm:text-3xl font-extrabold text-cyan-300 mb-1 sm:mb-2 text-center drop-shadow-lg tracking-tight">
-                                                {unifiedData.projects[selectedProject].title}
+                                                {projectList[selectedProject].title}
                                             </h2>
                                             <p className="text-gray-300 text-sm sm:text-lg mb-2 sm:mb-4 text-center font-medium">
-                                                {unifiedData.projects[selectedProject].description}
+                                                {projectList[selectedProject].details}
                                             </p>
                                             {/* Project Links */}
                                             <div className="flex justify-center gap-3 sm:gap-6 mt-1 sm:mt-2">
-                                                {unifiedData.projects[selectedProject].githubLink && (
-                                                    <a href={unifiedData.projects[selectedProject].githubLink} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-200 transition-colors">
+                                                {projectList[selectedProject].github_link && (
+                                                    <a href={projectList[selectedProject].github_link} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-200 transition-colors">
                                                         <FiGithub size={18} className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10" />
                                                     </a>
                                                 )}
-                                                {unifiedData.projects[selectedProject].demoLink && (
-                                                    <a href={unifiedData.projects[selectedProject].demoLink} target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-200 transition-colors">
+                                                {projectList[selectedProject].demo_link && (
+                                                    <a href={projectList[selectedProject].demo_link} target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-200 transition-colors">
                                                         <FiExternalLink size={18} className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10" />
                                                     </a>
                                                 )}
@@ -129,11 +144,11 @@ const Projects = () => {
                                         {/* Right: Features, Tech Stack, Awards, etc. */}
                                         <div>
                                             {/* Highlights */}
-                                            {unifiedData.projects[selectedProject].highlights && (
+                                            {projectList[selectedProject].highlights && (
                                                 <div className="mb-4 sm:mb-6">
                                                     <h4 className="text-base sm:text-xl font-semibold text-cyan-200 mb-2 sm:mb-3">Key Highlights</h4>
                                                     <ul className="space-y-1 sm:space-y-2">
-                                                        {unifiedData.projects[selectedProject].highlights.map((highlight, idx) => (
+                                                        {projectList[selectedProject].highlights.map((highlight, idx) => (
                                                             <li key={idx} className="flex items-start gap-1 sm:gap-2 text-gray-300 text-xs sm:text-base">
                                                                 <div className="w-2 h-2 rounded-full bg-cyan-400 mt-1 sm:mt-2 flex-shrink-0" />
                                                                 <span>{highlight}</span>
@@ -143,11 +158,11 @@ const Projects = () => {
                                                 </div>
                                             )}
                                             {/* Tech Stack */}
-                                            {unifiedData.projects[selectedProject].techStack && (
+                                            {projectList[selectedProject].tech_stack && (
                                                 <div className="mb-4 sm:mb-6">
                                                     <h4 className="text-base sm:text-xl font-semibold text-cyan-200 mb-2 sm:mb-3">Technology Stack</h4>
                                                     <div className="flex flex-wrap gap-2 sm:gap-3">
-                                                        {unifiedData.projects[selectedProject].techStack.map((tech, ) => (
+                                                        {projectList[selectedProject].tech_stack.map((tech) => (
                                                             <span key={tech} className="px-2 sm:px-4 py-1 sm:py-2 bg-slate-800 text-cyan-300 rounded-lg border border-slate-700 text-center font-medium shadow text-xs sm:text-base">
                                                                 {tech}
                                                             </span>
@@ -156,12 +171,12 @@ const Projects = () => {
                                                 </div>
                                             )}
                                             {/* Awards/Tags */}
-                                            {unifiedData.projects[selectedProject].category && (
+                                            {projectList[selectedProject].category && (
                                                 <div className="mb-4 sm:mb-6">
                                                     <h4 className="text-base sm:text-xl font-semibold text-yellow-300 mb-2 sm:mb-3">Category</h4>
                                                     <div className="flex flex-wrap gap-1 sm:gap-2">
                                                         <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-yellow-400/20 text-yellow-200 text-xs font-semibold shadow">
-                                                            {unifiedData.projects[selectedProject].category}
+                                                            {projectList[selectedProject].category}
                                                         </span>
                                                     </div>
                                                 </div>

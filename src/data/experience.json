@@ -1,8 +1,30 @@
 [
     {
-        "role": "Intern",
+        "role": "Software Engineer Intern",
+        "company": "Botivate LLC",
+        "duration": "Feb 2026 - April 2026",
+        "length": "2 months",
+        "description": "Contributed to 5 live projects using NodeJS, React, FastAPI, Torch, system designing, API & AI training. Led a team of 2 developers as Techno expert with client.",
+        "highlights": [
+            "Contributed to 5 live projects: CRM app, Production app, Expense tracker, Checkout & Delegation app, AI-powered Jewel app",
+            "Led a team of 2 developers as tech lead and client-facing expert",
+            "Worked across full stack: NodeJS, React, FastAPI, PyTorch, System Design",
+            "Handled AI training pipelines and API integrations for production apps"
+        ],
+        "techStack": ["Node.js", "React", "FastAPI", "PyTorch", "System Design", "AI Training", "REST APIs"]
+    },
+    {
+        "role": "Software Developer Intern",
         "company": "Innodeed Software Solution",
-        "duration": "July 2023 - August",
-        "length": "4 months"
+        "duration": "July 2023 - November 2023",
+        "length": "4 months",
+        "description": "Contributed to 2 projects using Spring Boot and React.js, delivering 5+ UI components and backend optimizations (~20% faster).",
+        "highlights": [
+            "Delivered 5+ UI components and backend optimizations achieving ~20% performance improvement",
+            "Contributed to 2 enterprise projects using Spring Boot and React.js",
+            "Learned industry best practices and professional development workflows",
+            "Collaborated with experienced development teams in Agile environment"
+        ],
+        "techStack": ["Java", "Spring Boot", "React.js", "Git", "Agile Methodology"]
     }
 ]

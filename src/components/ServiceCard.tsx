@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PayAndFeedback from "./PayAndFeedback";
-import { ArrowRight, Tag } from "lucide-react"; // Using lucide-react for icons
+import { ArrowRight, Tag, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 // The interface is now more flexible with the price type from JSON
@@ -10,6 +10,7 @@ interface ServiceCardProps {
     price: string | number; // Handles both string from JSON and number
     images?: string[];
     feedbacks?: string[];
+    features?: string[];
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -18,6 +19,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                                                      price,
                                                      images = [],
                                                      feedbacks = [],
+                                                     features = [],
                                                  }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -69,10 +71,22 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     </div>
 
                     {/* Call to Action */}
-                    <div className="flex items-center justify-center text-cyan-400 font-semibold text-xs sm:text-base">
+                    <div className="flex items-center justify-center text-cyan-400 font-semibold text-xs sm:text-base mb-2 sm:mb-3">
                         <span>View Details</span>
                         <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2 transform transition-transform duration-300 group-hover:translate-x-1" />
                     </div>
+
+                    {/* WhatsApp Book button */}
+                    <a
+                        href={`https://wa.me/919770075755?text=Hi%20Abeer!%20I'm%20interested%20in%20your%20${encodeURIComponent(title)}%20service.`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center justify-center gap-1.5 w-full py-2 sm:py-2.5 rounded-lg bg-green-600 hover:bg-green-500 text-white text-xs sm:text-sm font-semibold transition-colors duration-200"
+                    >
+                        <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                        Book via WhatsApp
+                    </a>
                 </div>
             </motion.div>
             {/* Modal: Pass all service data to PayAndFeedback */}
@@ -86,7 +100,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     images,
                     feedbacks,
                     availability: true,
-                    features: []
+                    features
                 }}
             />
         </>

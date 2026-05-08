@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
-import { fadeInUp } from "../utils/animations";
+import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Intro from "../components/Intro";
 import Education from "../components/Education";
 import Hackathons from "../components/Hackathons";
@@ -10,49 +9,96 @@ import ContactMe from "../components/ContactMe";
 import SkillsAndAwards from "../components/SkillsAndAwards";
 import FunEvents from "../components/FunEvents";
 
+// 3D scroll section wrapper — gives each section a subtle parallax tilt on scroll
+const ScrollSection = ({ children, id, delay = 0 }: {
+  children: React.ReactNode; id: string; delay?: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const rawY = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [60, 0, 0, -20]);
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0.8]);
+  const rawScale = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0.96, 1, 1, 0.99]);
+  const y = useSpring(rawY, { stiffness: 80, damping: 20 });
+  const scale = useSpring(rawScale, { stiffness: 80, damping: 20 });
+
+  return (
+    <motion.div
+      ref={ref}
+      id={id}
+      style={{ y, opacity: rawOpacity, scale }}
+      className="relative will-change-transform"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 const Home: React.FC = () => {
   useEffect(() => {
     if (window.location.hash) {
-      const element = document.getElementById(window.location.hash.slice(1));
-      element?.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
     }
   }, []);
 
   return (
-    <div className={`relative overflow-x-hidden "bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"`}>
-      {/* Content Sections with entrance effects */}
-      <div className="relative">
-        <motion.section id="intro" className="min-h-screen" initial="initial" animate="animate" variants={fadeInUp}>
+    <div className="relative overflow-x-hidden">
+      {/* Sticky ambient background blobs that move slowly */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <motion.div
+          className="absolute w-[600px] h-[600px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%)", top: "5%", left: "-10%" }}
+          animate={{ x: [0, 30, 0], y: [0, 20, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute w-[500px] h-[500px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)", top: "30%", right: "-8%" }}
+          animate={{ x: [0, -20, 0], y: [0, 30, 0] }}
+          transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute w-[400px] h-[400px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(14,165,233,0.07) 0%, transparent 70%)", bottom: "10%", left: "30%" }}
+          animate={{ x: [0, 15, 0], y: [0, -20, 0] }}
+          transition={{ duration: 32, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="relative z-10">
+        {/* Intro — no 3D scroll, it IS the entry */}
+        <div id="intro" className="min-h-screen">
           <Intro />
-        </motion.section>
+        </div>
 
-        <motion.section id="education" initial="initial" animate="animate" variants={fadeInUp}>
+        <ScrollSection id="education" delay={0}>
           <Education />
-        </motion.section>
+        </ScrollSection>
 
-        <motion.section id="hackathons" initial="initial" animate="animate" variants={fadeInUp}>
+        <ScrollSection id="hackathons" delay={0.1}>
           <Hackathons />
-        </motion.section>
+        </ScrollSection>
 
-        <motion.section id="skills" initial="initial" animate="animate" variants={fadeInUp}>
-          <SkillsAndAwards  />
-        </motion.section>
+        <ScrollSection id="skills" delay={0}>
+          <SkillsAndAwards />
+        </ScrollSection>
 
-        <motion.section id="projects" initial="initial" animate="animate" variants={fadeInUp}>
+        <ScrollSection id="projects" delay={0}>
           <Projects />
-        </motion.section>
+        </ScrollSection>
 
-        <motion.section id="work" initial="initial" animate="animate" variants={fadeInUp}>
+        <ScrollSection id="work" delay={0}>
           <WorkExperience />
-        </motion.section>
+        </ScrollSection>
 
-        <motion.section id="events" initial="initial" animate="animate" variants={fadeInUp}>
-          <FunEvents  />
-        </motion.section>
+        <ScrollSection id="events" delay={0}>
+          <FunEvents />
+        </ScrollSection>
 
-        <motion.section id="contact" initial="initial" animate="animate" variants={fadeInUp}>
+        <ScrollSection id="contact" delay={0}>
           <ContactMe />
-        </motion.section>
+        </ScrollSection>
       </div>
     </div>
   );

@@ -6,7 +6,12 @@
         "Managerial skills",
         "Great prompt engineer",
         "Questioning skill",
-        "Observation"
+        "Observation",
+        "Team Management",
+        "Agile Sprints",
+        "Product Thinking",
+        "Public Speaking",
+        "UX Thinking"
     ],
     "languages": [
         "Java",
@@ -15,52 +20,76 @@
         "TypeScript",
         "SQL (PostgreSQL, MySQL)",
         "HTML",
-        "CSS"
+        "CSS",
+        "Solidity"
     ],
     "frameworks_libraries": [
         "React.js",
         "Next.js",
         "Node.js",
         "Express.js",
+        "FastAPI",
         "Spring Boot",
         "Tailwind CSS",
+        "Framer Motion",
         "Scikit-learn",
         "Pandas",
         "NumPy",
-        "Matplotlib"
+        "Matplotlib",
+        "Axios",
+        "NLP",
+        "RAG",
+        "Fine-tuning"
+    ],
+    "ai_agentic": [
+        "Gemini Pro",
+        "Groq (LLaMA 3)",
+        "Local LLM Integration",
+        "Prompt Engineering",
+        "Agentic AI Pipelines",
+        "Autonomous Agents",
+        "Langraph",
+        "Function Calling",
+        "MCP",
+        "A2A",
+        "Judge0 API"
+    ],
+    "blockchain_web3": [
+        "Solidity",
+        "IPFS via Pinata",
+        "Smart Contracts",
+        "Ethereum (fundamentals)"
     ],
     "cloud_devops": [
         "AWS (EC2, S3)",
         "Docker",
         "Firebase",
-        "Git/GitHub"
+        "Vercel",
+        "Git/GitHub",
+        "ZOHO Site24x7",
+        "CI/CD basics"
     ],
     "databases": [
+        "PostgreSQL (Neon, Supabase)",
         "MongoDB",
-        "PostgreSQL",
-        "Firebase Firestore"
+        "Firebase Firestore",
+        "MySQL"
     ],
     "developer_tools": [
-        "Git",
+        "Figma",
+        "Telegram Bot API",
+        "Clerk (Auth)",
+        "Razorpay (Payments)",
+        "WhatsApp API",
+        "Jupyter",
         "VS Code",
-        "Visual Studio",
-        "PyCharm",
-        "Net beans",
-        "Neon",
-        "Eclipse",
         "Cursor",
-        "Clerk",
-        "Telegram Bot-Father",
-        "Google Firebase",
-        "FiGMA",
-        "Government APIs",
+        "Postman",
         "ChatGPT",
-        "Gemini pro",
+        "Gemini Pro",
         "Copilot",
         "Perplexity",
-        "WhatsApp API",
-        "Payment gateway",
-        "Pinata for Web3 as IPFS"
+        "Pinata (IPFS/Web3)"
     ],
     "other_tools": [
         "Jupyter",
@@ -74,10 +103,9 @@
         "Pandas",
         "NumPy",
         "Matplotlib",
-        "SqlConnection",
         "NLP",
         "RAG",
-        "Fine tuning",
-        "Scikit"
+        "Fine-tuning",
+        "Scikit-learn"
     ]
 }

@@ -1,205 +1,167 @@
-// src/components/ContactMe.tsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, CheckCircle, MessageSquare } from 'lucide-react';
-import content from '../data/content.json';
+import { Mail, Send, CheckCircle, MessageSquare, Phone } from 'lucide-react';
+import personalInfo from '../data/personal_info.json';
+
+const WHATSAPP_URL =
+  'https://wa.me/919770075755?text=Hi%20Abeer!%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect.';
 
 const ContactMe = () => {
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [currentEmoji, setCurrentEmoji] = useState('👋');
-
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission with fun emoji changes
-    setCurrentEmoji('📨');
-    await new Promise(resolve => setTimeout(resolve, 500));
-    setCurrentEmoji('✈️');
-    await new Promise(resolve => setTimeout(resolve, 500));
-    setCurrentEmoji('🎉');
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormState({ name: '', email: '', message: '' });
-
-    // Reset success message and emoji after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setCurrentEmoji('👋');
-    }, 3000);
-  };
-
-  const handleInputFocus = (emoji: string) => {
-    setCurrentEmoji(emoji);
+    setIsSubmitting(true); setSubmitError(null); setCurrentEmoji('📨');
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState),
+      });
+      setCurrentEmoji('✈️');
+      await new Promise(r => setTimeout(r, 400));
+      if (!response.ok) { const err = await response.json(); throw new Error(err.error || 'Failed'); }
+      setCurrentEmoji('🎉'); setIsSubmitting(false); setIsSubmitted(true);
+      setFormState({ name: '', email: '', message: '' });
+      setTimeout(() => { setIsSubmitted(false); setCurrentEmoji('👋'); }, 3000);
+    } catch (err) {
+      setCurrentEmoji('😔'); setIsSubmitting(false);
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong.');
+      setTimeout(() => { setSubmitError(null); setCurrentEmoji('👋'); }, 5000);
+    }
   };
 
   return (
-    <section className="py-12 sm:py-20 bg-gray-900">
-      <div className="max-w-2xl sm:max-w-6xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-        {/* Fun Header */}
+    <section className="section-light py-16 sm:py-24 relative overflow-hidden">
+      <div className="orb orb-indigo w-80 h-80 -top-10 -right-20 opacity-25" />
+      <div className="orb orb-pink w-64 h-64 bottom-0 -left-10 opacity-20" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-8 sm:mb-16"
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} className="text-center mb-12"
         >
-          <motion.div
-            className="text-4xl sm:text-6xl mb-2 sm:mb-4 cursor-pointer"
-            animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
+          <motion.div className="text-5xl sm:text-6xl mb-4 inline-block"
+            animate={{ rotate: [0, -10, 10, -10, 10, 0] }} transition={{ duration: 2.5, repeat: Infinity }}>
             {currentEmoji}
           </motion.div>
-          <h2 className="text-2xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-2 sm:mb-4">
-            Let's Connect!
-          </h2>
-          <p className="text-gray-400 max-w-md sm:max-w-2xl mx-auto text-sm sm:text-base">
-            Got a cool project idea? Want to collaborate? Or just want to say hi?
-            Drop me a message! 🚀
+          <h2 className="text-3xl sm:text-5xl font-bold mb-3" style={{
+            background: "linear-gradient(135deg, #4f46e5, #7c3aed, #06b6d4)",
+            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text"
+          }}>Let's Connect</h2>
+          <p className="text-gray-500 max-w-lg mx-auto text-sm sm:text-base">
+            Have a project idea, want to collaborate, or just say hi? I'd love to hear from you.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12">
-          {/* Contact Form */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-10">
+          {/* Form — wider */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} className="md:col-span-3"
           >
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-4 sm:space-y-6 bg-gray-800 p-4 sm:p-8 rounded-lg sm:rounded-xl shadow-xl"
-            >
-              <div className="space-y-2 sm:space-y-4">
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1">
-                    Your Name
-                  </label>
-                  <motion.input
-                    type="text"
-                    required
-                    value={formState.name}
-                    onChange={(e) => setFormState(prev => ({ ...prev, name: e.target.value }))}
-                    onFocus={() => handleInputFocus('😊')}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-shadow text-xs sm:text-base"
-                    placeholder="Watari Kapoor"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1">
-                    Your Email
-                  </label>
-                  <motion.input
-                    type="email"
-                    required
-                    value={formState.email}
-                    onChange={(e) => setFormState(prev => ({ ...prev, email: e.target.value }))}
-                    onFocus={() => handleInputFocus('📧')}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-shadow text-xs sm:text-base"
-                    placeholder="watari.kapoor@hehe.com"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1">
-                    Your Message
-                  </label>
-                  <motion.textarea
-                    required
-                    value={formState.message}
-                    onChange={(e) => setFormState(prev => ({ ...prev, message: e.target.value }))}
-                    onFocus={() => handleInputFocus('💭')}
-                    rows={4}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-shadow resize-none text-xs sm:text-base"
-                    placeholder="Tell me about your ideas..."
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </div>
+            <form onSubmit={handleSubmit} className="glass-card rounded-2xl p-6 sm:p-8 space-y-5">
+              <div>
+                <label className="block text-xs font-semibold text-indigo-700 mb-1.5 uppercase tracking-wide">Your Name</label>
+                <motion.input
+                  type="text" required value={formState.name}
+                  onChange={e => setFormState(p => ({ ...p, name: e.target.value }))}
+                  onFocus={() => setCurrentEmoji('😊')}
+                  placeholder="Ratan Tata"
+                  className="w-full px-4 py-3 rounded-xl bg-white/70 text-gray-800 placeholder-gray-400 border border-indigo-100 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all text-sm shadow-sm"
+                  whileFocus={{ scale: 1.01 }}
+                />
               </div>
-
+              <div>
+                <label className="block text-xs font-semibold text-indigo-700 mb-1.5 uppercase tracking-wide">Your Email</label>
+                <motion.input
+                  type="email" required value={formState.email}
+                  onChange={e => setFormState(p => ({ ...p, email: e.target.value }))}
+                  onFocus={() => setCurrentEmoji('📧')}
+                  placeholder="you@example.com"
+                  className="w-full px-4 py-3 rounded-xl bg-white/70 text-gray-800 placeholder-gray-400 border border-indigo-100 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all text-sm shadow-sm"
+                  whileFocus={{ scale: 1.01 }}
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-indigo-700 mb-1.5 uppercase tracking-wide">Message</label>
+                <motion.textarea
+                  required value={formState.message}
+                  onChange={e => setFormState(p => ({ ...p, message: e.target.value }))}
+                  onFocus={() => setCurrentEmoji('💭')}
+                  rows={4} placeholder="Tell me about your idea..."
+                  className="w-full px-4 py-3 rounded-xl bg-white/70 text-gray-800 placeholder-gray-400 border border-indigo-100 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 outline-none transition-all resize-none text-sm shadow-sm"
+                  whileFocus={{ scale: 1.01 }}
+                />
+              </div>
               <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium text-white 
-                  ${isSubmitting ? 'bg-gray-600' : 'bg-gradient-to-r from-cyan-500 to-blue-500'}
-                  hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300
-                  flex items-center justify-center space-x-2 text-xs sm:text-base`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                type="submit" disabled={isSubmitting}
+                className={`w-full px-6 py-3 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 transition-all duration-200 shadow-md
+                  ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-indigo-500 to-violet-500 hover:shadow-indigo-200 hover:scale-[1.02]'}`}
+                whileHover={!isSubmitting ? { scale: 1.02 } : {}} whileTap={{ scale: 0.98 }}
               >
-                {isSubmitting ? (
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
-                ) : isSubmitted ? (
-                  <>
-                    <CheckCircle className="w-5 h-5" />
-                    <span>Message Sent!</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    <span>Send Message</span>
-                  </>
-                )}
+                {isSubmitting ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
+                  : isSubmitted ? <><CheckCircle className="w-4 h-4" /> Sent!</>
+                  : <><Send className="w-4 h-4" /> Send Message</>}
               </motion.button>
+              {submitError && <p className="text-red-500 text-xs text-center animate-pulse">{submitError}</p>}
             </form>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Info cards */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-4 sm:space-y-8"
+            initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} className="md:col-span-2 space-y-4"
           >
-            {/* Contact Details */}
-            <div className="bg-gray-800 p-4 sm:p-8 rounded-lg sm:rounded-xl shadow-xl">
-              <h3 className="text-lg sm:text-2xl font-bold text-white mb-3 sm:mb-6 flex items-center gap-2 sm:gap-3">
-                <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
-                Get in Touch
-              </h3>
-              <motion.a
-                href={`mailto:${content.personal.email}`}
-                className="flex items-center space-x-2 sm:space-x-3 text-gray-400 hover:text-cyan-400 transition-colors text-xs sm:text-base"
-                whileHover={{ x: 5 }}
-              >
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span>{content.personal.email}</span>
-              </motion.a>
+            {/* Email */}
+            <div className="glass-card rounded-2xl p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="p-2 rounded-xl bg-indigo-50 border border-indigo-100">
+                  <Mail className="w-4 h-4 text-indigo-500" />
+                </div>
+                <h3 className="font-bold text-indigo-900 text-sm">Email</h3>
+              </div>
+              <a href={`mailto:${personalInfo.email}`}
+                className="text-indigo-600 text-sm hover:text-indigo-800 transition-colors font-medium">
+                {personalInfo.email}
+              </a>
             </div>
 
-            {/* Quick Response Promise */}
-            <motion.div
-              className="bg-gray-800 p-4 sm:p-8 rounded-lg sm:rounded-xl shadow-xl"
-              whileHover={{ scale: 1.02 }}
-            >
-              <h3 className="text-lg sm:text-2xl font-bold text-white mb-4 flex items-center gap-2 sm:gap-3">
-                <MessageSquare className="w-6 h-6 text-purple-400" />
-                Quick Response
-              </h3>
-              <p className="text-gray-400 text-sm sm:text-base">
-                I usually respond within 24 hours! Let's create something amazing together. ⚡
-              </p>
-            </motion.div>
+            {/* Phone */}
+            <div className="glass-card rounded-2xl p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="p-2 rounded-xl bg-green-50 border border-green-100">
+                  <Phone className="w-4 h-4 text-green-500" />
+                </div>
+                <h3 className="font-bold text-indigo-900 text-sm">Phone</h3>
+              </div>
+              <a href="tel:+919770075755"
+                className="text-gray-700 text-sm hover:text-indigo-600 transition-colors font-medium block mb-3">
+                +91 97700 75755
+              </a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-green-500 hover:bg-green-600 text-white text-xs font-bold transition-colors shadow-sm shadow-green-200">
+                💬 Chat on WhatsApp
+              </a>
+            </div>
 
-            {/* Location */}
-            <motion.div
-              className="bg-gray-800 p-4 sm:p-8 rounded-lg sm:rounded-xl shadow-xl"
-              whileHover={{ scale: 1.02 }}
-            >
-              <h3 className="text-lg sm:text-2xl font-bold text-white mb-4">Location</h3>
-              <p className="text-gray-400 text-sm sm:text-base">
-                Based in {content.personal.location}, available for remote work worldwide 🌎
+            {/* Response time */}
+            <div className="glass-card rounded-2xl p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="p-2 rounded-xl bg-violet-50 border border-violet-100">
+                  <MessageSquare className="w-4 h-4 text-violet-500" />
+                </div>
+                <h3 className="font-bold text-indigo-900 text-sm">Quick Response</h3>
+              </div>
+              <p className="text-gray-600 text-xs leading-relaxed">
+                Usually responds within 24 hours. Based in Bhilai, Chhattisgarh — available for remote work worldwide. 🌎
               </p>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
