@@ -60,9 +60,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       tgData = JSON.parse(raw);
     } catch {
       tgData = null;
-    }
-
-    if (!tgRes.ok || tgData?.ok === false) {
+        const hasToken = !!process.env.TELEGRAM_BOT_TOKEN;
+        const hasChat = !!process.env.TELEGRAM_CHAT_ID;
+        console.log('telegram env present', { hasToken, hasChat });
+        if (!hasToken || !hasChat) {
+          console.error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
+          return res.status(500).json({ error: 'Telegram env is not configured' });
+        }
       const detail = tgData?.description || raw || `HTTP ${tgRes.status}`;
       console.error('Telegram send error:', detail);
       return res.status(502).json({ error: 'Telegram delivery failed', detail });
@@ -70,7 +74,47 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(200).json({ success: true, message: 'Message delivered to Telegram!' });
   } catch (err) {
-    console.error('Telegram error:', err);
-    return res.status(500).json({ error: 'Failed to send message' });
-  }
-}
+        // Attempt send with a small retry to handle transient network issues
+        let lastError: any = null;
+        for (let attempt = 1; attempt <= 2; attempt++) {
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 10000);
+          try {
+            const tgRes = await fetch(
+              `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+              {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: process.env.TELEGRAM_CHAT_ID, text: tgText }),
+                signal: controller.signal,
+              }
+            );
+            clearTimeout(timeout);
+
+            const raw = await tgRes.text();
+            let tgData: { ok?: boolean; description?: string } | null = null;
+            try {
+              tgData = JSON.parse(raw);
+            } catch {
+              tgData = null;
+            }
+
+            console.log(`telegram response attempt=${attempt}`, { status: tgRes.status, ok: tgRes.ok, parsedOk: tgData?.ok === true });
+
+            if (tgRes.ok && tgData?.ok !== false) {
+              return res.status(200).json({ success: true, message: 'Message delivered to Telegram!' });
+            }
+
+            lastError = tgData?.description || raw || `HTTP ${tgRes.status}`;
+            console.error('Telegram send error attempt', attempt, lastError);
+            // small backoff before retrying
+            if (attempt < 2) await new Promise((r) => setTimeout(r, 500));
+          } catch (fetchErr) {
+            clearTimeout(timeout);
+            lastError = fetchErr && fetchErr.message ? fetchErr.message : String(fetchErr);
+            console.error('Telegram fetch exception attempt', attempt, lastError);
+            if (attempt < 2) await new Promise((r) => setTimeout(r, 500));
+          }
+        }
+
+        return res.status(502).json({ error: 'Telegram delivery failed', detail: lastError });
