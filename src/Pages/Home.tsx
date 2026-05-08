@@ -46,7 +46,7 @@ const Home: React.FC = () => {
   return (
     <div className="relative overflow-x-hidden">
       {/* Sticky ambient background blobs that move slowly */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden home-orbs">
         <motion.div
           className="absolute w-[600px] h-[600px] rounded-full"
           style={{ background: "radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%)", top: "5%", left: "-10%" }}

@@ -69,6 +69,46 @@ body {
 
 * { cursor: none !important; }
 
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto;
+    font-size: 15px;
+  }
+
+  * {
+    cursor: auto !important;
+  }
+
+  .orb,
+  .home-orbs {
+    display: none !important;
+  }
+
+  .hero-photo {
+    width: 156px !important;
+    height: 156px !important;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 4.25rem;
+  }
+
+  .glass-card,
+  .glass-card-strong,
+  .glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
 /* ─── TYPOGRAPHY SYSTEM ─── */
 .font-display { font-family: 'Sora', sans-serif; }
 .font-mono    { font-family: 'JetBrains Mono', monospace; }
