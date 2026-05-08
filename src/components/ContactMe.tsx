@@ -24,7 +24,17 @@ const ContactMe = () => {
       });
       setCurrentEmoji('✈️');
       await new Promise(r => setTimeout(r, 400));
-      if (!response.ok) { const err = await response.json(); throw new Error(err.error || 'Failed'); }
+      if (!response.ok) {
+        const raw = await response.text();
+        let errMsg = 'Failed to send message.';
+        try {
+          const parsed = JSON.parse(raw) as { error?: string; message?: string };
+          errMsg = parsed.error || parsed.message || errMsg;
+        } catch {
+          errMsg = raw && !raw.startsWith('<') ? raw : `Server error (${response.status})`;
+        }
+        throw new Error(errMsg);
+      }
       setCurrentEmoji('🎉'); setIsSubmitting(false); setIsSubmitted(true);
       setFormState({ name: '', email: '', message: '' });
       setTimeout(() => { setIsSubmitted(false); setCurrentEmoji('👋'); }, 3000);

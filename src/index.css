@@ -309,6 +309,16 @@ body {
   box-shadow: var(--shadow-md);
 }
 
+.social-btn {
+  border: 1px solid rgba(79, 70, 229, 0.16);
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.72));
+  box-shadow: 0 6px 16px rgba(79,70,229,0.10);
+}
+.social-btn:hover {
+  border-color: rgba(79, 70, 229, 0.30);
+  box-shadow: 0 10px 24px rgba(79,70,229,0.16);
+}
+
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }

@@ -23,7 +23,7 @@ const Footer: React.FC<FooterProps> = ({ personalInfo }) => (
   >
     <div className="flex flex-col items-center gap-4 max-w-lg mx-auto">
       {/* Social icons */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3 sm:gap-4">
         {[
           { href: personalInfo.github, icon: <FaGithub size={18} />, color: "text-gray-600 hover:text-gray-900" },
           { href: personalInfo.linkedin, icon: <FaLinkedin size={18} />, color: "text-indigo-500 hover:text-indigo-700" },
@@ -31,8 +31,12 @@ const Footer: React.FC<FooterProps> = ({ personalInfo }) => (
           { href: "https://x.com/AbeerKapoor1/", icon: <FaXTwitter size={18} />, color: "text-sky-500 hover:text-sky-700" },
         ].map((s, i) => (
           <motion.a key={i} href={s.href} target={s.href.startsWith("mailto") ? undefined : "_blank"}
-            rel="noopener noreferrer" className={`p-2.5 rounded-xl transition-colors ${s.color}`}
-            style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(255,255,255,0.8)", boxShadow: "0 2px 8px rgba(99,102,241,0.08)" }}
+            rel="noopener noreferrer" className={`p-2.5 sm:p-3 rounded-2xl transition-all duration-200 ${s.color}`}
+            style={{
+              background: "linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.72))",
+              border: "1px solid rgba(255,255,255,0.95)",
+              boxShadow: "0 6px 18px rgba(79,70,229,0.12), 0 1px 0 rgba(255,255,255,0.9) inset"
+            }}
             whileHover={{ scale: 1.12, y: -2 }} whileTap={{ scale: 0.95 }}>
             {s.icon}
           </motion.a>

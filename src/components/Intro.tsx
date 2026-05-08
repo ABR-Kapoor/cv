@@ -104,7 +104,7 @@ const Intro = () => (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
         {/* LEFT — text content */}
-        <div className="flex flex-col gap-5 sm:gap-6 text-center lg:text-left items-center lg:items-start">
+        <div className="flex flex-col gap-5 sm:gap-6 text-center lg:text-left items-center lg:items-start order-2 lg:order-1">
           {/* Mono label */}
           <motion.div
             className="text-label"
@@ -197,15 +197,15 @@ const Intro = () => (
               <Download size={14} strokeWidth={2.5} />
               Download CV
             </a>
-            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="btn-secondary w-full sm:w-auto justify-center">
+            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="btn-secondary social-btn w-full sm:w-auto justify-center">
               <FaLinkedin size={14} />
               <span>LinkedIn</span>
             </a>
-            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="btn-secondary w-full sm:w-auto justify-center">
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="btn-secondary social-btn w-full sm:w-auto justify-center">
               <FaGithub size={14} />
               <span>GitHub</span>
             </a>
-            <a href="https://x.com/AbeerKapoor1/" target="_blank" rel="noopener noreferrer" className="btn-secondary w-full sm:w-auto justify-center">
+            <a href="https://x.com/AbeerKapoor1/" target="_blank" rel="noopener noreferrer" className="btn-secondary social-btn w-full sm:w-auto justify-center">
               <FaXTwitter size={14} />
             </a>
           </motion.div>
@@ -213,7 +213,7 @@ const Intro = () => (
 
         {/* RIGHT — photo */}
         <motion.div
-          className="flex justify-center lg:justify-end"
+          className="flex justify-center lg:justify-end order-1 lg:order-2 mb-2 lg:mb-0"
           initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
